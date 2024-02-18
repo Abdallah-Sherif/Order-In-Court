@@ -145,6 +145,8 @@ namespace URC.Core
         [Tooltip("Advanced settings for the motor that you usually do not need to change.")]
         public AdvancedSettings m_advancedSettings = new AdvancedSettings();
 
+        public static Motor instance;
+
         #endregion
 
         #region Private variables
@@ -189,6 +191,8 @@ namespace URC.Core
 
             // Set the logging level based on settings
             Logging.SetLoggingLevel(m_advancedSettings.LoggingLevel);
+
+            instance = this;
         }
 
         private void Update()

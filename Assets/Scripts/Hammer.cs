@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using URC.Core;
 
 public class Hammer : MonoBehaviour
 {
-    Animator anim;
+    [SerializeField] Animator anim;
     private float timeSinceLastSlow = 0f;
     private float timewhenslowed = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        anim= GetComponent<Animator>();
-    }
 
     // Update is called once per frame
     void Update()
     {
         timeSinceLastSlow = Time.time - timewhenslowed;
         anim.SetBool("isAttack", Input.GetKey(KeyCode.Mouse0));
+
+        anim.SetFloat("moveSpeed", Mathf.Lerp(anim.GetFloat("moveSpeed") , Motor.instance.GetComponent<Rigidbody>().velocity.magnitude / 6f , 5 * Time.deltaTime) );
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "HammerSwing")
+        Debug.Log(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+        if (other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "slash")
         {
             Vector3 hitDir = other.transform.position - transform.position;
             other.GetComponent<Rigidbody>().AddForce(hitDir * 10f, ForceMode.Impulse);

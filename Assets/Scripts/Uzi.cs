@@ -38,6 +38,7 @@ public class Uzi : MonoBehaviour
             dir.Normalize();
             GameObject bullet = Instantiate(_bulletPrefab, _shootPos.position, Quaternion.LookRotation(dir) );
             bullet.GetComponent<Rigidbody>().velocity = dir * _bulletSpeed;
+            bullet.tag = this.transform.tag;
         }
     }
     IEnumerator CoolDown()

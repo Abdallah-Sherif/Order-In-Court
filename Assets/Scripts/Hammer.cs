@@ -23,7 +23,7 @@ public class Hammer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-        if (other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "swing 2s")
+        if (other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "swing smooth")
         {
             Vector3 hitDir = other.transform.position - transform.position;
             other.GetComponent<Rigidbody>().AddForce(hitDir * 10f, ForceMode.Impulse);

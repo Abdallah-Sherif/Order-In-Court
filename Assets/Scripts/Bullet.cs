@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bullet : MonoBehaviour
 {
     // Start is called before the first frame update
     string tag;
+    [SerializeField]UnityEvent onHit;
+    bool isDying = false;
+    public bool activateExpo = false;
     void Start()
     {
         Destroy(gameObject,10);
@@ -18,8 +22,22 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
-        if (collision.transform.tag == tag) return;
-        collision.gameObject.GetComponent<Health>().TakeDamage(100);
+        if (isDying) return;
+        if (activateExpo)
+        {
+            onHit.Invoke();
+            Destroy(gameObject, 1.5f);
+        }else
+        {
+            Destroy(gameObject);
+        }
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<BoxCollider>().isTrigger= true;
+        isDying= true;
+        if (collision.transform.tag == tag ) return;
+        Health health = collision.gameObject.GetComponent<Health>();
+        if (health == null) return;
+        health.TakeDamage(100);
+
     }
 }

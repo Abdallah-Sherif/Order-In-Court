@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Uzi : MonoBehaviour
 {
@@ -13,38 +15,108 @@ public class Uzi : MonoBehaviour
     [SerializeField] KeyCode _shootKey;
     [SerializeField] GameObject _bulletPrefab;
     bool canFire = true;
+    [Header("Ability Properties")]
+    [SerializeField] float ability1Duration;
+    [SerializeField] float ability1Cooldown;
+    bool abilityInProgress = false;
+    private Ability ability0, ability1,ability2;
+
+
+    private void IntializeAbilites()
+    {
+        ability0 = new Ability();
+        ability1 = new Ability();
+        ability2 = new Ability();
+        ability0.abilityDuration = 0;
+        ability0.coolDown = _bulletFireRate;
+        ability0.abilityLogicStart = delegate
+        {
+            ShootBullets();
+        };
+        ability0.abilityLogicStop = delegate{};
+        ability1.interuptsAbilites = false;
+        ability1.abilityDuration = ability1Duration;
+        ability1.coolDown = ability1Cooldown;
+        ability1.abilityLogicStart = delegate 
+        {
+            ability0.coolDown /= 2;
+        };
+        ability1.abilityLogicStop = delegate 
+        {
+            ability0.coolDown *= 2;
+        };
+
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        IntializeAbilites();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(_shootKey))
+        if(Input.GetKey(_shootKey) && !abilityInProgress && ability0.canCast)
         {
-            ShootBullets();
+            AbilityStart(ability0);
         }
-    }
+        if (Input.GetKey(_shootKey)&&Input.GetKey(KeyCode.Q) && !abilityInProgress && ability1.canCast)
+        {
+            AbilityStart(ability1);
+        }
+    } 
     void ShootBullets()
     {
-        if(canFire) 
-        {
-            StartCoroutine(CoolDown());
-            float x_offset = UnityEngine.Random.Range(-_bulletSpread, _bulletSpread);
-            float y_offset = UnityEngine.Random.Range(-_bulletSpread, _bulletSpread);
-            Vector3 dir = transform.forward + new Vector3(x_offset, y_offset, 0);
-            dir.Normalize();
-            GameObject bullet = Instantiate(_bulletPrefab, _shootPos.position, Quaternion.LookRotation(dir) );
-            bullet.GetComponent<Rigidbody>().velocity = dir * _bulletSpeed;
-            bullet.tag = this.transform.tag;
-        }
+        float x_offset = UnityEngine.Random.Range(-_bulletSpread, _bulletSpread);
+        float y_offset = UnityEngine.Random.Range(-_bulletSpread, _bulletSpread);
+        Vector3 dir = transform.forward + new Vector3(x_offset, y_offset, 0);
+        dir.Normalize();
+        GameObject bullet = Instantiate(_bulletPrefab, _shootPos.position, Quaternion.LookRotation(dir));
+        bullet.GetComponent<Rigidbody>().velocity = dir * _bulletSpeed;
+        bullet.tag = this.transform.tag;
+        if (ability0.coolDown < _bulletFireRate) bullet.GetComponent<Bullet>().activateExpo = true;
     }
-    IEnumerator CoolDown()
+    void AbilityStart(Ability ability)
     {
-        canFire = false;
-        yield return new WaitForSeconds(_bulletFireRate);
-        canFire = true;
+        StartCoroutine(AbilityDuration(ability));
+    }
+    IEnumerator AbilityDuration(Ability ability)
+    {
+        //ability logic
+        ability.abilityLogicStart.Invoke();
+        if(ability.interuptsAbilites) abilityInProgress = true;
+        ability.canCast = false;
+        yield return new WaitForSeconds(ability.abilityDuration);
+        ability.abilityLogicStop.Invoke();
+        abilityInProgress = false;
+        StartCoroutine(AbilityCooldown(ability));
+    }
+    IEnumerator AbilityCooldown(Ability ability) 
+    {
+        yield return new WaitForSeconds(ability.coolDown);
+        ability.canCast = true;
+    }
+
+}
+public class Ability
+{
+    public Action abilityLogicStart;
+    public Action abilityLogicStop;
+    public float coolDown;
+    public float abilityDuration;
+
+    public string abilityName = "NoName (please assign a name)";
+
+    [HideInInspector] public UnityEvent[] events;
+
+    [HideInInspector] public bool canCast = true;
+    [HideInInspector] public bool skipNextCoolDown = false;
+    [HideInInspector] public bool isDisabled = false;
+
+    public bool interuptsAbilites = true;
+
+    public void DisableAbility(bool b)
+    {
+        isDisabled = b;
     }
 }

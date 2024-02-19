@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 {
     // Start is called before the first frame update
     string tag;
-    [SerializeField]UnityEvent onHit;
+    [SerializeField] UnityEvent onHit;
     bool isDying = false;
     public bool activateExpo = false;
     void Start()

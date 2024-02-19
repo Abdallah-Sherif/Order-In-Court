@@ -1,3 +1,5 @@
+using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,10 +50,13 @@ namespace URC.Movement
         // Movement
         private Vector3 m_desiredDirection;
 
+        [SerializeField] CinemachineVirtualCamera vc;
+        [SerializeField] float fovIncreaseFactor = 2f;
         private void Update()
         {
             // Grab desired input in update to be as up to date as possible
             m_desiredDirection = GetDirection();
+            vc.m_Lens.FieldOfView = Mathf.Lerp(vc.m_Lens.FieldOfView, 100 + Motor.instance.m_rigidbody.velocity.magnitude * fovIncreaseFactor,Time.deltaTime * 2);
         }
 
         private void FixedUpdate()

@@ -21,6 +21,8 @@ public class Uzi : MonoBehaviour
     bool abilityInProgress = false;
     private Ability ability0, ability1,ability2;
 
+    [SerializeField] Animator anim;
+
 
     private void IntializeAbilites()
     {
@@ -29,11 +31,16 @@ public class Uzi : MonoBehaviour
         ability2 = new Ability();
         ability0.abilityDuration = 0;
         ability0.coolDown = _bulletFireRate;
+        ability0.interuptsAbilites = false;
         ability0.abilityLogicStart = delegate
         {
+            anim.SetBool("isShoot", true);
             ShootBullets();
         };
-        ability0.abilityLogicStop = delegate{};
+        ability0.abilityLogicStop = delegate
+        {
+            
+        };
         ability1.interuptsAbilites = false;
         ability1.abilityDuration = ability1Duration;
         ability1.coolDown = ability1Cooldown;
@@ -56,7 +63,8 @@ public class Uzi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(_shootKey) && !abilityInProgress && ability0.canCast)
+        anim.SetBool("isShoot", Input.GetKey(_shootKey));
+        if (Input.GetKey(_shootKey) && !abilityInProgress && ability0.canCast)
         {
             AbilityStart(ability0);
         }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using URC.Core;
 
@@ -14,6 +15,7 @@ public class Hammer : MonoBehaviour
     Ability ability0, ability1, ability2;
     bool abilityInProgress = false;
     [SerializeField] Transform _playerModel;
+    [SerializeField] UnityEvent onHammerHit;
     [Header("Ground Pound Properties")]
     [SerializeField] float impactPower = 10f;
     // Update is called once per frame
@@ -41,15 +43,15 @@ public class Hammer : MonoBehaviour
             anim.SetBool("isAttack", false);
         };
 
-        ability1.abilityDuration = 1f;
-        ability1.coolDown = 1f;
+        ability1.abilityDuration = 0.4f;
+        ability1.coolDown = 2f;
         ability1.abilityLogicStart = delegate
         {
-            ThrowEnemies();
+            anim.SetTrigger("hammerPound");
         };
         ability1.abilityLogicStop = delegate
         {
-            
+            ThrowEnemies();
         };
 
     }
@@ -58,7 +60,6 @@ public class Hammer : MonoBehaviour
         Collider[] hits = Physics.OverlapSphere(_playerModel.position + _playerModel.forward * 5, 6,enemieLayerMask);
         foreach(Collider collider in hits)
         {
-            Debug.Log(collider.gameObject.name);
             collider.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * impactPower, ForceMode.Impulse);
         }    
     }
@@ -112,8 +113,9 @@ public class Hammer : MonoBehaviour
         if (abilityInProgress&&other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "swing smooth")
         {
             Vector3 hitDir = other.transform.position - transform.position;
-            other.GetComponent<Rigidbody>().AddForce(hitDir * 10f, ForceMode.Impulse);
-            if(timeSinceLastSlow > 0.5f) StartCoroutine(TimeEfect());
+            onHammerHit.Invoke();
+            StartCoroutine(EnemieTimeEffect(other,hitDir));
+            if (timeSinceLastSlow > 0.5f) StartCoroutine(TimeEfect());
             Debug.Log("SMASH");
             Debug.Log(timeSinceLastSlow);
         }
@@ -125,6 +127,14 @@ public class Hammer : MonoBehaviour
         timewhenslowed= Time.time;
         yield return new WaitForSeconds(0.2f);
         anim.speed = 1f;
+    }
+    IEnumerator EnemieTimeEffect(Collider collider,Vector3 hitDir)
+    {
+        Rigidbody rb_temp = collider.GetComponent<Rigidbody>();
+        rb_temp.isKinematic = true;
+        yield return new WaitForSeconds(0.2f);
+        rb_temp.isKinematic = false;
+        rb_temp.AddForce(hitDir * 10f, ForceMode.Impulse);
     }
 }
 

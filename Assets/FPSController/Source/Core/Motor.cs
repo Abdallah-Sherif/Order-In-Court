@@ -164,7 +164,7 @@ namespace URC.Core
         private float m_groundForceTime;            // Timer for forcing motor to be grounded
 
         // Component references
-        private Rigidbody m_rigidbody;              // The rigidbody of the character
+        public Rigidbody m_rigidbody;              // The rigidbody of the character
         private CapsuleCollider m_collider;         // The collider of the character
 
         // Modules

@@ -704,6 +704,9 @@ MonoBehaviour:
   shooPos: {fileID: 1037087787}
   bulletSpeed: 2000
   bulletDelay: 5
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!1 &264584971
 GameObject:
   m_ObjectHideFlags: 0

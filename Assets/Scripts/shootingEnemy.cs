@@ -8,7 +8,10 @@ public class shootingEnemy : MonoBehaviour
     [SerializeField] Transform shooPos;
     [SerializeField] float bulletSpeed = 5f;
     [SerializeField] float bulletDelay = 5f;
+    [SerializeField] LayerMask obstacleLayer;
+    [SerializeField] float detectionRangearget = Mathf.Infinity;
     Transform player;
+    bool check = true;
     bool canShoot = true;
     void Start()
     {
@@ -17,6 +20,7 @@ public class shootingEnemy : MonoBehaviour
     void Update()
     {
         aimHandler();
+        checkShoot();
         shooting();
     }
     void aimHandler()
@@ -25,16 +29,26 @@ public class shootingEnemy : MonoBehaviour
     }
     void shooting()
     {
-        if (!canShoot) return;
-        else
+        if (check)
         {
-            GameObject bulletOnj = Instantiate(bullet, shooPos.position, transform.rotation);
-            bulletOnj.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed);
-            Destroy(bulletOnj, 5f);
-            StartCoroutine(shootDelay());   
+            if (!canShoot) return;
+            else
+            {
+                GameObject bulletOnj = Instantiate(bullet, shooPos.position, transform.rotation);
+                bulletOnj.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed);
+                Destroy(bulletOnj, 5f);
+                StartCoroutine(shootDelay());
+            }
         }
     }
-
+    void checkShoot()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, detectionRangearget, obstacleLayer))
+            check = false;
+        else
+            check = true;
+    }
     IEnumerator shootDelay()
     {
         canShoot = false;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : EnemyBehaviourScript
+public class ExplodingEnemy : EnemyBehaviourScript
 {
     [SerializeField] GameObject fire_VFX;
     private void OnCollisionEnter(Collision collision)

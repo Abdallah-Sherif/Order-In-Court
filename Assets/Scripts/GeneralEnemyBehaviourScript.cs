@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public abstract class EnemyBehaviourScript : MonoBehaviour
 {
-    Transform player;
-    NavMeshAgent enemy;
+    protected Transform player;
+    protected NavMeshAgent enemy;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;

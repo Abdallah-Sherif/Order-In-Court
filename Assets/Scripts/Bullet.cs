@@ -13,12 +13,26 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Destroy(gameObject,10);
+        StartCoroutine(ChangeLayer());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    IEnumerator ChangeLayer()
+    {
+        yield return new WaitForSeconds(0.1f);
+        ChangeLayer(this.gameObject, 0);
+    }
+    void ChangeLayer(GameObject targetObject, int newLayer)
+    {
+        targetObject.layer = newLayer;
+        foreach (Transform child in targetObject.transform)
+        {
+            ChangeLayer(child.gameObject, newLayer);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -37,7 +51,7 @@ public class Bullet : MonoBehaviour
         if (collision.transform.tag == tag ) return;
         Health health = collision.gameObject.GetComponent<Health>();
         if (health == null) return;
-        health.TakeDamage(100);
+        health.TakeDamage(10);
 
     }
 }

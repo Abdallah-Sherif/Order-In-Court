@@ -14,16 +14,23 @@ public class Uzi : MonoBehaviour
     [SerializeField] float _bulletFireRate;
     [SerializeField] KeyCode _shootKey;
     [SerializeField] GameObject _bulletPrefab;
-    bool canFire = true;
     [Header("Ability Properties")]
     [SerializeField] float ability1Duration;
     [SerializeField] float ability1Cooldown;
-    bool abilityInProgress = false;
+    public bool abilityInProgress = false;
     private Ability ability0, ability1,ability2;
 
     [SerializeField] Animator anim;
+    [SerializeField] AudioClip shootAudioClip;
 
-
+    public static Uzi instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
     private void IntializeAbilites()
     {
         ability0 = new Ability();
@@ -47,10 +54,12 @@ public class Uzi : MonoBehaviour
         ability1.abilityLogicStart = delegate 
         {
             ability0.coolDown /= 2;
+            anim.speed= 2;
         };
         ability1.abilityLogicStop = delegate 
         {
             ability0.coolDown *= 2;
+            anim.speed =1;
         };
 
     }
@@ -75,6 +84,7 @@ public class Uzi : MonoBehaviour
     } 
     void ShootBullets()
     {
+        AudioFxManager.instance.PlaySoundEffect(shootAudioClip, this.transform, 1);
         float x_offset = UnityEngine.Random.Range(-_bulletSpread, _bulletSpread);
         float y_offset = UnityEngine.Random.Range(-_bulletSpread, _bulletSpread);
         Vector3 dir = transform.forward + new Vector3(x_offset, y_offset, 0);

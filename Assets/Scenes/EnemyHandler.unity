@@ -653,10 +653,40 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemieMelee
       objectReference: {fileID: 0}
+    - target: {fileID: 6226839521917783057, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
+      propertyPath: health
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226839521917783057, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
+      propertyPath: maxHealth
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
+      propertyPath: speed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
+      propertyPath: acceleration
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
+      propertyPath: distanceToStop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
         type: 3}
       propertyPath: defaultAttackCoolDown
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
+      propertyPath: defaultAttackEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
         type: 3}
@@ -665,9 +695,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
         type: 3}
+      propertyPath: defaultAttackEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
       propertyPath: specialAttackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
+      propertyPath: defaultAttackEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1034304945}
     - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
         type: 3}
       propertyPath: specialAttackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -675,8 +715,18 @@ PrefabInstance:
       objectReference: {fileID: 1171192437}
     - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
         type: 3}
+      propertyPath: defaultAttackEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
       propertyPath: specialAttackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
+      propertyPath: defaultAttackEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
         type: 3}
@@ -685,8 +735,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
         type: 3}
+      propertyPath: defaultAttackEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.Animator, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
       propertyPath: specialAttackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: EnemieMelee, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
+      propertyPath: defaultAttackEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: isAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
+        type: 3}
+      propertyPath: defaultAttackEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6480304074032202626, guid: 0b06dd95acad155419ebeb20b69b752a,
         type: 3}
@@ -1053,7 +1118,7 @@ PrefabInstance:
     - target: {fileID: 8099996740612524614, guid: 141e1779869c79845bd243610f187f47,
         type: 3}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8099996740612524614, guid: 141e1779869c79845bd243610f187f47,
         type: 3}
@@ -1300,6 +1365,12 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!95 &1034304945 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2313921180385911800, guid: 0b06dd95acad155419ebeb20b69b752a,
+    type: 3}
+  m_PrefabInstance: {fileID: 556275197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1065180242 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4735161070083145310, guid: 141e1779869c79845bd243610f187f47,
@@ -2911,7 +2982,7 @@ PrefabInstance:
     - target: {fileID: 1353094595933459946, guid: ae333c9a02a08b546b4012ea41bbeedf,
         type: 3}
       propertyPath: field of view
-      value: 101.2624
+      value: 100.0164
       objectReference: {fileID: 0}
     - target: {fileID: 1353094595933459946, guid: ae333c9a02a08b546b4012ea41bbeedf,
         type: 3}
@@ -2983,6 +3054,11 @@ PrefabInstance:
       propertyPath: onHammerHit.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6455852585354965331, guid: ae333c9a02a08b546b4012ea41bbeedf,
+        type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 100.0164
+      objectReference: {fileID: 0}
     - target: {fileID: 7457009145224567785, guid: ae333c9a02a08b546b4012ea41bbeedf,
         type: 3}
       propertyPath: m_Size.x
@@ -3023,6 +3099,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemieBuffer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4343186838939350976, guid: f3b00e64f20ec274881aaf7cac4ee47d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5055949764692380718, guid: f3b00e64f20ec274881aaf7cac4ee47d,
         type: 3}

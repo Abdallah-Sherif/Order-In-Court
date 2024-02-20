@@ -138,6 +138,11 @@ public class EnemyBase : MonoBehaviour
 
         //
 
+        if (state == State.Stun)
+        {
+            animator.gameObject.transform.forward = -rb.velocity;
+        }
+
         if (isAttacking || state == State.Stun || state == State.Dead) 
         { return; }
         if(state == State.Dead) state = State.Dead;
@@ -181,9 +186,6 @@ public class EnemyBase : MonoBehaviour
             case State.specialAttack:
                 SpecialAttack();
                 break;
-            case State.Stun:
-                Stun();
-                break;
         }
         if(hasSpecial && (state == State.chasing || state == State.defaultAttack) && canSpecialAttack)
         {
@@ -202,17 +204,16 @@ public class EnemyBase : MonoBehaviour
     }
     public void GetStunned()
     {
-        state = State.Stun;
+        state = State.Stun;    
         StartCoroutine(stunDelay());
-    }
-    void Stun()
-    {
-        
     }
     IEnumerator stunDelay()
     {
         onStun.Invoke();
+        animator.SetBool("isStunned" , true);
         yield return new WaitForSeconds(1f);
+        animator.gameObject.transform.localEulerAngles = Vector3.zero;
+        animator.SetBool("isStunned", false);
         onUnStun.Invoke();
         state = State.chasing;
     }
@@ -284,8 +285,6 @@ public class EnemyBase : MonoBehaviour
 
     void DefaultAttack()
     {
-
-
         isAttacking = true;
         StartCoroutine(delay());
 
@@ -308,7 +307,6 @@ public class EnemyBase : MonoBehaviour
     public void DisableAnyAttackState()
     {
         isAttacking = false;
-        animator.SetBool("isAttack" , false);
         state = State.Null;
     }
     //

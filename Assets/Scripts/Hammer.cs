@@ -13,11 +13,26 @@ public class Hammer : MonoBehaviour
     private float timewhenslowed = 0;
     [SerializeField] LayerMask enemieLayerMask;
     Ability ability0, ability1, ability2;
-    bool abilityInProgress = false;
+    public bool abilityInProgress = false;
     [SerializeField] Transform _playerModel;
     [SerializeField] UnityEvent onHammerHit;
     [Header("Ground Pound Properties")]
     [SerializeField] float impactPower = 10f;
+    [SerializeField] List<AudioClip> hammerPoundAudioClips;
+    [SerializeField] List<AudioClip> hammerSwooshAudioClips;
+    [SerializeField] List<AudioClip> hammerImpactAudioClips;
+    [SerializeField] AudioClip hammerClickSFX;
+    [SerializeField] AudioClip EnemieDeathSFX;
+    public static Hammer instance;
+    AudioSource audioSource;
+    List<Collider> enemiesAttacked;
+    private void Awake()
+    {
+        if (instance == null) 
+        {
+            instance = this;
+        }
+    }
     // Update is called once per frame
     private void IntializeAbilites()
     {
@@ -37,6 +52,7 @@ public class Hammer : MonoBehaviour
         ability0.abilityLogicStart = delegate
         {
             anim.SetBool("isAttack", true);
+            AudioFxManager.instance.PlaySoundEffect(hammerSwooshAudioClips[Random.Range(0, hammerSwooshAudioClips.Count)], transform, 1f);
         };
         ability0.abilityLogicStop = delegate
         {
@@ -48,6 +64,9 @@ public class Hammer : MonoBehaviour
         ability1.abilityLogicStart = delegate
         {
             anim.SetTrigger("hammerPound");
+            AudioFxManager.instance.PlayPlayerFX(hammerPoundAudioClips[Random.Range(0, hammerPoundAudioClips.Count)], 1f,true);
+            AudioFxManager.instance.PlaySoundEffect(hammerClickSFX, transform, 1f);
+
         };
         ability1.abilityLogicStop = delegate
         {
@@ -71,6 +90,7 @@ public class Hammer : MonoBehaviour
     private void Start()
     {
         IntializeAbilites();
+        enemiesAttacked = new List<Collider>();
     }
     void Update()
     {
@@ -110,17 +130,16 @@ public class Hammer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-        if (abilityInProgress&&other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "swing smooth")
+        if ( !enemiesAttacked.Contains(other) && abilityInProgress&&other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "swing smooth")
         {
+            enemiesAttacked.Add(other);
             Vector3 hitDir = other.transform.position - transform.position;
             onHammerHit.Invoke();
+            AudioFxManager.instance.PlaySoundEffect(hammerImpactAudioClips[Random.Range(0, hammerImpactAudioClips.Count)], transform, 1f);
             StartCoroutine(EnemieTimeEffect(other,hitDir));
             if (timeSinceLastSlow > 0.5f) StartCoroutine(TimeEfect());
-            Debug.Log("SMASH");
-            Debug.Log(timeSinceLastSlow);
         }
     }
-    
     IEnumerator TimeEfect() 
     {
         anim.speed = 0.01f;
@@ -134,7 +153,16 @@ public class Hammer : MonoBehaviour
         rb_temp.isKinematic = true;
         yield return new WaitForSeconds(0.2f);
         rb_temp.isKinematic = false;
-        rb_temp.AddForce(hitDir * 10f, ForceMode.Impulse);
+        int factor = 2;
+        collider.GetComponent<Health>().TakeDamage(20);
+        if(collider.GetComponent<Health>().health <= 0) 
+        {
+            AudioFxManager.instance.PlaySoundEffect(EnemieDeathSFX, collider.transform, 1f);
+            factor = 10;
+        }
+        rb_temp.AddForce(hitDir * factor, ForceMode.Impulse);
+        yield return new WaitForSeconds(1f);
+        enemiesAttacked.Remove(collider);
     }
 }
 

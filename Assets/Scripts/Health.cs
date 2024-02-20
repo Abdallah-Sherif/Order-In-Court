@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     public UnityEvent onHit;
     public UnityEvent onDeath;
 
-    int health = 100;
+    public int health = 100;
     public int maxHealth;
 
     public void TakeDamage(int damage)

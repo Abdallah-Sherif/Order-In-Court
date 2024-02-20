@@ -13,12 +13,26 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Destroy(gameObject,10);
+        StartCoroutine(ChangeLayer());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    IEnumerator ChangeLayer()
+    {
+        yield return new WaitForSeconds(0.1f);
+        ChangeLayer(this.gameObject, 0);
+    }
+    void ChangeLayer(GameObject targetObject, int newLayer)
+    {
+        targetObject.layer = newLayer;
+        foreach (Transform child in targetObject.transform)
+        {
+            ChangeLayer(child.gameObject, newLayer);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {

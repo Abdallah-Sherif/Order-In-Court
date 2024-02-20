@@ -222,8 +222,6 @@ public class EnemyBase : MonoBehaviour
         if (state == State.defaultAttack || state == State.specialAttack)
             return;
 
-        if (animator == null) return;
-
         animator.SetBool("isWalk", (rb.velocity.magnitude > 0.3f));
         animator.SetFloat("walkSpeed", Mathf.Clamp(rb.velocity.magnitude, 0, 1));
     }
@@ -273,7 +271,7 @@ public class EnemyBase : MonoBehaviour
         {
             LookAt(GetPlayer().position, 100000);
 
-            //StopMovement();
+            StopMovement();
             specialAttackEvent.Invoke();
 
             canSpecialAttack = false;
@@ -310,7 +308,7 @@ public class EnemyBase : MonoBehaviour
     public void DisableAnyAttackState()
     {
         isAttacking = false;
-        //animator.SetBool("isAttack" , false);
+        animator.SetBool("isAttack" , false);
         state = State.Null;
     }
     //

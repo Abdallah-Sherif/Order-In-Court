@@ -85,6 +85,8 @@ public class EnemyBase : MonoBehaviour
                 Debug.DrawLine(NMP.corners[i], NMP.corners[i + 1], Color.red);
         }
 
+        bool braking = true;
+        
         Move();
 
         void Move()
@@ -95,7 +97,18 @@ public class EnemyBase : MonoBehaviour
             if (Vector3.Distance(transform.position, target) > distanceToStop)
             {
                 LookAt(NMP.corners[1], 5);
-                rb.AddRelativeForce(Vector3.forward * speed * Time.deltaTime, ForceMode.Force);
+                rb.AddForce((NMP.corners[1] - transform.position) * speed * Time.deltaTime, ForceMode.Acceleration);
+
+                braking = true;
+            }
+            else
+            {
+                if (braking == true)
+                {
+                    Debug.Log("brake");
+                    rb.AddForce(-rb.velocity.normalized * Time.deltaTime * (speed / 4));
+                    braking = false;
+                }
             }
 
             if (rb.velocity.magnitude > acceleration)
@@ -166,8 +179,19 @@ public class EnemyBase : MonoBehaviour
             case State.specialAttack:
                 SpecialAttack();
                 break;
+            case State.Stun:
+                Stun();
+                break;
         }
 
+    }
+
+    void Stun()
+    {
+        IEnumerator stunDelay()
+        {
+            yield return new WaitForSeconds(.2f);
+        }
     }
 
     void Animate()
@@ -327,6 +351,11 @@ public class EnemyBase : MonoBehaviour
         Vector3 lookRotation = pos - transform.position;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, Quaternion.LookRotation(lookRotation).eulerAngles.y, 0) , smoothValue * Time.deltaTime);
     }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }
 
 public enum State
@@ -335,6 +364,7 @@ public enum State
     chasing,
     defaultAttack,
     specialAttack,
+    Stun,
     Null
 }
 

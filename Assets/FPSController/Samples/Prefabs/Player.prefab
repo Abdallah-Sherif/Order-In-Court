@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2118975850570513042}
   - component: {fileID: 2118975850570513044}
   - component: {fileID: 2118975850570513045}
+  - component: {fileID: 1931249308813141063}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -198,11 +199,32 @@ MonoBehaviour:
   m_gravityScale: 2
   m_groundLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 200
   m_maxSlopeAngle: 45
   m_advancedSettings:
     LoggingLevel: 1
     m_useOptimizations: 0
+  m_rigidbody: {fileID: 0}
+--- !u!114 &1931249308813141063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118975850155193173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945ad5d4b8187664e8e0699fbd27a6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHit:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  health: 100
+  maxHealth: 100
 --- !u!1 &2118975851282553941
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +239,8 @@ GameObject:
   - component: {fileID: 2118975851282554030}
   - component: {fileID: 2118975851282553937}
   - component: {fileID: 2118975851282553936}
-  - component: {fileID: 2118975851282553939}
+  - component: {fileID: 3520949380009845163}
+  - component: {fileID: 1785955351619295020}
   m_Layer: 0
   m_Name: URC Modules
   m_TagString: Untagged
@@ -262,6 +285,8 @@ MonoBehaviour:
     Deceleration: 0
   m_stepHeight: 0
   m_stepSpeed: 0
+  vc: {fileID: 0}
+  fovIncreaseFactor: 2
 --- !u!114 &2118975851282554031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +400,7 @@ MonoBehaviour:
   m_minVelocity: 1
   m_resetSpeed: 0.2
   m_resetDelay: 0.2
---- !u!114 &2118975851282553939
+--- !u!114 &3520949380009845163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -384,16 +409,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2118975851282553941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41b83194dcceccd49980aeb2bc6c4265, type: 3}
+  m_Script: {fileID: 11500000, guid: eb2a2953f3045f74f8eff4df15ff49af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sprintingKey: 304
-  m_isToggle: 0
-  m_sprintStartDelay: 0.1
-  m_mustStartGrounded: 1
-  m_speedMultiplier: 2
-  m_requireGrounding: 0
-  m_requireMovement: 1
-  m_sprintingFov: 65
-  m_FovChangeSpeed: 0.2
-  m_FovResetSpeed: 0.2
+  DashSpeed: 25
+  m_dashKey: 304
+  dashCooldown: 1
+--- !u!114 &1785955351619295020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118975851282553941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 226b8027ec9409748b935a264bd47eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceLines:
+  - {fileID: 8300000, guid: 1c8a060e1cbfddc45b3e668197e21f5e, type: 3}
+  - {fileID: 8300000, guid: bf3da725f6b4529428dab8d89d8efa80, type: 3}
+  - {fileID: 8300000, guid: 7d97fe6bee5a8754dab5813541082abc, type: 3}
+  onAbility:
+    m_PersistentCalls:
+      m_Calls: []

@@ -51,7 +51,7 @@ public class Bullet : MonoBehaviour
         if (collision.transform.tag == tag ) return;
         Health health = collision.gameObject.GetComponent<Health>();
         if (health == null) return;
-        health.TakeDamage(100);
+        health.TakeDamage(10);
 
     }
 }

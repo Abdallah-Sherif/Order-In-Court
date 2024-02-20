@@ -49,7 +49,9 @@ public class EnemyBase : MonoBehaviour
 
     bool canDefaultAttack = true;
     bool canSpecialAttack = true;
-
+    [Header("34an sleem 2aly a3ml header")]
+    [SerializeField] UnityEvent onStun;
+    [SerializeField] UnityEvent onUnStun;
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -134,7 +136,7 @@ public class EnemyBase : MonoBehaviour
 
         //
 
-        if (isAttacking)
+        if (isAttacking || state == State.Stun) 
         { return; }
             
 
@@ -186,12 +188,21 @@ public class EnemyBase : MonoBehaviour
 
     }
 
+    public void GetStunned()
+    {
+        state = State.Stun;
+        StartCoroutine(stunDelay());
+    }
     void Stun()
     {
-        IEnumerator stunDelay()
-        {
-            yield return new WaitForSeconds(.2f);
-        }
+        
+    }
+    IEnumerator stunDelay()
+    {
+        onStun.Invoke();
+        yield return new WaitForSeconds(1f);
+        onUnStun.Invoke();
+        state = State.chasing;
     }
 
     void Animate()

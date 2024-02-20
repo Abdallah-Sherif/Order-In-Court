@@ -16,6 +16,7 @@ public class Hammer : MonoBehaviour
     public bool abilityInProgress = false;
     [SerializeField] Transform _playerModel;
     [SerializeField] UnityEvent onHammerHit;
+    [SerializeField] float enemieKnockBackImpact = 10f;
     [Header("Ground Pound Properties")]
     [SerializeField] float impactPower = 10f;
     [SerializeField] List<AudioClip> hammerPoundAudioClips;
@@ -153,14 +154,12 @@ public class Hammer : MonoBehaviour
         rb_temp.isKinematic = true;
         yield return new WaitForSeconds(0.2f);
         rb_temp.isKinematic = false;
-        int factor = 2;
         collider.GetComponent<Health>().TakeDamage(20);
         if(collider.GetComponent<Health>().health <= 0) 
         {
             AudioFxManager.instance.PlaySoundEffect(EnemieDeathSFX, collider.transform, 1f);
-            factor = 10;
         }
-        rb_temp.AddForce(hitDir * factor, ForceMode.Impulse);
+        rb_temp.AddForce(hitDir * enemieKnockBackImpact, ForceMode.Impulse);
         yield return new WaitForSeconds(1f);
         enemiesAttacked.Remove(collider);
     }

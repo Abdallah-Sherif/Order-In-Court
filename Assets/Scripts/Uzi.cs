@@ -54,12 +54,12 @@ public class Uzi : MonoBehaviour
         ability1.abilityLogicStart = delegate 
         {
             ability0.coolDown /= 2;
-            anim.speed *= 2;
+            anim.speed= 2;
         };
         ability1.abilityLogicStop = delegate 
         {
             ability0.coolDown *= 2;
-            anim.speed /= 2;
+            anim.speed =1;
         };
 
     }

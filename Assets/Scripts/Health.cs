@@ -11,16 +11,15 @@ public class Health : MonoBehaviour
     public int health = 100;
     public int maxHealth;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage,string weaponUsed = "")
     {
         health -= damage;
-        Debug.Log("HIT");
         if(health <= 0)
         {
             onDeath.Invoke();
             Destroy(gameObject,3);
             return;
         }
-        onHit.Invoke();
+        if(weaponUsed == "Hammer") onHit.Invoke();
     }
 }

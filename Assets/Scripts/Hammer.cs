@@ -81,6 +81,7 @@ public class Hammer : MonoBehaviour
         foreach(Collider collider in hits)
         {
             collider.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * impactPower, ForceMode.Impulse);
+            collider.GetComponent<Health>().TakeDamage(50,"Hammer");
         }    
     }
     private void OnDrawGizmos()
@@ -153,8 +154,9 @@ public class Hammer : MonoBehaviour
         Rigidbody rb_temp = collider.GetComponent<Rigidbody>();
         rb_temp.isKinematic = true;
         yield return new WaitForSeconds(0.2f);
+        if(rb_temp != null)
         rb_temp.isKinematic = false;
-        collider.GetComponent<Health>().TakeDamage(20);
+        collider.GetComponent<Health>().TakeDamage(20,"Hammer");
         if(collider.GetComponent<Health>().health <= 0) 
         {
             AudioFxManager.instance.PlaySoundEffect(EnemieDeathSFX, collider.transform, 1f);

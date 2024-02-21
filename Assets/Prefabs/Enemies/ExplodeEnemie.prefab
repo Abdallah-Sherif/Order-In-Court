@@ -168,7 +168,7 @@ MonoBehaviour:
   speed: 100
   acceleration: 10
   distanceToStop: 0.1
-  defaultAttackCoolDown: 0
+  defaultAttackCoolDown: 1
   defaultAttackEvent:
     m_PersistentCalls:
       m_Calls:
@@ -396,6 +396,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1300059880423429698, guid: d3aaccfe080cc0742895d67714ebd119,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c930806bf2aa2243a126944baa86d8a, type: 2}
     - target: {fileID: 919132149155446097, guid: d3aaccfe080cc0742895d67714ebd119,
         type: 3}
       propertyPath: m_Name

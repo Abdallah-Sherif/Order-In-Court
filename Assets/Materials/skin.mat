@@ -167,8 +167,8 @@ Material:
     - _Parallax: 0.005
     - _PureShadowColor: 0
     - _QueueOffset: 0
-    - _Ramp0: -0.36
-    - _Ramp1: 0.4
+    - _Ramp0: 0.333
+    - _Ramp1: -0.398
     - _RampSmoothness: 0
     - _RampTriple: 1
     - _ReceiveBlobShadows: 0
@@ -206,7 +206,7 @@ Material:
     - _MainColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0, g: 0, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0.75}
-    - _ShadowTint: {r: 0, g: 0, b: 0, a: 1}
+    - _ShadowTint: {r: 0.5283019, g: 0.44008544, b: 0.38127446, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

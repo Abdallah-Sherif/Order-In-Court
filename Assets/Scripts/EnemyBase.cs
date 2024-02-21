@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.ShaderGraph.Internal;
@@ -75,10 +76,8 @@ public class EnemyBase : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, specialAttackRadius);
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
-        if (state == State.Stun) return;
-
         UpdateNavMeshPath();
 
         void UpdateNavMeshPath()
@@ -98,13 +97,13 @@ public class EnemyBase : MonoBehaviour
 
         void Move()
         {
-            if (NMP.corners.Length == 0)
+            if (NMP.corners.Length <= 1)
                 return;
 
             if (Vector3.Distance(transform.position, target) > distanceToStop)
             {
-                LookAt(NMP.corners[1], 5);
-                rb.AddForce((NMP.corners[1] - transform.position) * speed * Time.deltaTime, ForceMode.Acceleration);
+                LookAt(NMP.corners[1], 15);
+                rb.AddForce((NMP.corners[1] - transform.position).normalized * speed * Time.deltaTime, ForceMode.Acceleration);
 
                 braking = true;
             }
@@ -113,12 +112,12 @@ public class EnemyBase : MonoBehaviour
                 if (braking == true)
                 {
                     Debug.Log("brake");
-                    rb.AddForce(-rb.velocity.normalized * Time.deltaTime * (speed / 4));
+                    rb.AddForce(-rb.velocity.normalized * Time.deltaTime * (speed / 4), ForceMode.Acceleration);
                     braking = false;
                 }
             }
 
-            if (rb.velocity.magnitude > acceleration && state != State.Stun)
+            if (rb.velocity.magnitude > acceleration)
             {
                 rb.velocity = Vector3.ClampMagnitude(rb.velocity, acceleration);
             }
@@ -143,6 +142,7 @@ public class EnemyBase : MonoBehaviour
 
         if (state == State.Stun)
         {
+            Debug.Log("sds");
             animator.gameObject.transform.forward = -rb.velocity;
         }
 
@@ -152,7 +152,6 @@ public class EnemyBase : MonoBehaviour
 
 
         float nearp_p = Vector3.Distance(nearestPlayer.position, transform.position);
-        Debug.Log(nearp_p);
         if (nearp_p <= detectionRadius)
         {
             

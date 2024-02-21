@@ -122,7 +122,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4883573763080330909}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   speed: 200
   acceleration: 10
   distanceToStop: 0.1
-  defaultAttackCoolDown: 0
+  defaultAttackCoolDown: 2
   defaultAttackEvent:
     m_PersistentCalls:
       m_Calls:
@@ -189,6 +189,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hasSpecial: 0
+  isBuffed: 0
   onStun:
     m_PersistentCalls:
       m_Calls:
@@ -346,6 +347,21 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295265787474462747, guid: 06ef0fd037c6dfe4a9397540662e933e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.28611815
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295265787474462747, guid: 06ef0fd037c6dfe4a9397540662e933e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.28611815
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295265787474462747, guid: 06ef0fd037c6dfe4a9397540662e933e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.28611815
       objectReference: {fileID: 0}
     - target: {fileID: 5295265787474462747, guid: 06ef0fd037c6dfe4a9397540662e933e,
         type: 3}

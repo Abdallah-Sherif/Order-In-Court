@@ -41,7 +41,7 @@ public class EnemyBase : MonoBehaviour
 
     [Header("EnemyProperties")]
     [Range(0, 20)]
-    [SerializeField] private float defaultAttackCoolDown;
+    public float defaultAttackCoolDown;
     [SerializeField] private UnityEvent defaultAttackEvent;
     [Range(0, 20)]
     [SerializeField] private float specialAttackCoolDown;
@@ -51,7 +51,6 @@ public class EnemyBase : MonoBehaviour
     bool canDefaultAttack = true;
     bool canSpecialAttack = true;
     public bool isBuffed = false;
-    public float nearp_p = 0;
     [Header("34an sleem 2aly a3ml header")]
     [SerializeField] UnityEvent onStun;
     [SerializeField] UnityEvent onUnStun;
@@ -78,6 +77,8 @@ public class EnemyBase : MonoBehaviour
 
     public void Update()
     {
+        if (state == State.Stun) return;
+
         UpdateNavMeshPath();
 
         void UpdateNavMeshPath()
@@ -117,7 +118,7 @@ public class EnemyBase : MonoBehaviour
                 }
             }
 
-            if (rb.velocity.magnitude > acceleration)
+            if (rb.velocity.magnitude > acceleration && state != State.Stun)
             {
                 rb.velocity = Vector3.ClampMagnitude(rb.velocity, acceleration);
             }
@@ -148,10 +149,10 @@ public class EnemyBase : MonoBehaviour
         if (isAttacking || state == State.Stun || state == State.Dead) 
         { return; }
         if(state == State.Dead) state = State.Dead;
-            
 
-        nearp_p = Vector3.Distance(nearestPlayer.position, transform.position);
 
+        float nearp_p = Vector3.Distance(nearestPlayer.position, transform.position);
+        Debug.Log(nearp_p);
         if (nearp_p <= detectionRadius)
         {
             
@@ -294,7 +295,7 @@ public class EnemyBase : MonoBehaviour
         {
             LookAt(GetPlayer().position, 100000);
 
-            StopMovement();
+            //StopMovement();
             defaultAttackEvent.Invoke();
 
             canDefaultAttack = false;

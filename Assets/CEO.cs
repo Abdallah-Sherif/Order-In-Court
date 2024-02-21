@@ -27,12 +27,6 @@ public class CEO : EnemyBase
         StartCoroutine(DropMoneyBags());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator DropMoneyBags()
     {
         GameObject moneyBag = Instantiate(moneyBagPrefab, new Vector3(GetPlayer().transform.position.x
@@ -44,26 +38,28 @@ public class CEO : EnemyBase
     }
     IEnumerator SpawnArrows()
     {
-        GameObject arrow = Instantiate(stockArrowPrefab, stockShootPoint.position, stockShootPoint.transform.rotation);
-        arrow.GetComponent<Rigidbody>().velocity = (GetPlayer().transform.position - stockShootPoint.transform.position)
-            * arrowSpeed;
+        SummonProjectile(0, arrowSpeed, true);
+        arrowsShot += 1;
         yield return new WaitForSeconds(arrowSpawnRate);
-        if(arrowsShot < numberOfArrows) StartCoroutine(SpawnArrows());
-        else DisableAnyAttackState();
+        if (arrowsShot < numberOfArrows)
+        {
+            StartCoroutine(SpawnArrows());
+        }
+        else
+        {
+            animator.SetBool("isStock", false);
+            DisableAnyAttackState();
+            arrowsShot = 0;
+        }
     }
     public void AttackPlayer()
     {
         GetPlayer().GetComponent<Health>().TakeDamage(meleeDamage);
         DisableAnyAttackState();
     }
-    public void RandomizeAttacks()
+    public void ShootArrows()
     {
-        if(nearp_p <= meleeDistance)
-        {
-            AttackPlayer();
-        }else
-        {
-            //SpawnArrows();
-        }
+        animator.SetBool("isStock", true);
+        StartCoroutine(SpawnArrows());
     }
 }

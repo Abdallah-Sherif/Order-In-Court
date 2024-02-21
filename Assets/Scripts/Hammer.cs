@@ -54,7 +54,7 @@ public class Hammer : MonoBehaviour
         ability0.abilityLogicStart = delegate
         {
             anim.SetBool("isAttack", true);
-            AudioFxManager.instance.PlaySoundEffect(hammerSwooshAudioClips[Random.Range(0, hammerSwooshAudioClips.Count)], transform, 1f);
+            AudioFxManager.instance.PlaySoundEffect(hammerSwooshAudioClips[Random.Range(0, hammerSwooshAudioClips.Count)], transform, 2f);
         };
         ability0.abilityLogicStop = delegate
         {
@@ -67,7 +67,7 @@ public class Hammer : MonoBehaviour
         {
             anim.SetTrigger("hammerPound");
             AudioFxManager.instance.PlayPlayerFX(hammerPoundAudioClips[Random.Range(0, hammerPoundAudioClips.Count)], 1f,true);
-            AudioFxManager.instance.PlaySoundEffect(hammerClickSFX, transform, 1f);
+            AudioFxManager.instance.PlaySoundEffect(hammerClickSFX, transform, 2f);
 
         };
         ability1.abilityLogicStop = delegate
@@ -132,14 +132,13 @@ public class Hammer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
         if ( !enemiesAttacked.Contains(other) && abilityInProgress&&other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "swing smooth")
         {
             GameObject impactEffect = Instantiate(impactParticleEffect, other.transform.position, Quaternion.identity);
             enemiesAttacked.Add(other);
             Vector3 hitDir = other.transform.position - transform.position;
             onHammerHit.Invoke();
-            AudioFxManager.instance.PlaySoundEffect(hammerImpactAudioClips[Random.Range(0, hammerImpactAudioClips.Count)], transform, 1f);
+            AudioFxManager.instance.PlaySoundEffect(hammerImpactAudioClips[Random.Range(0, hammerImpactAudioClips.Count)], transform, 2f);
             StartCoroutine(EnemieTimeEffect(other,hitDir));
             if (timeSinceLastSlow > 0.5f) StartCoroutine(TimeEfect());
         }
@@ -158,10 +157,11 @@ public class Hammer : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         if(rb_temp != null)
         rb_temp.isKinematic = false;
+        if (collider == null) yield return null; 
         collider.GetComponent<Health>().TakeDamage(20,"Hammer");
         if(collider.GetComponent<Health>().health <= 0) 
         {
-            AudioFxManager.instance.PlaySoundEffect(EnemieDeathSFX, collider.transform, 1f);
+            AudioFxManager.instance.PlaySoundEffect(EnemieDeathSFX, collider.transform, 2f);
         }
         rb_temp.AddForce(hitDir * enemieKnockBackImpact, ForceMode.Impulse);
         yield return new WaitForSeconds(1f);

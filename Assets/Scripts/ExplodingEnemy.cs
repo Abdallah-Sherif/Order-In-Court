@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class ExplodingEnemy : EnemyBase
@@ -15,7 +16,7 @@ public class ExplodingEnemy : EnemyBase
 
             if (Vector3.Distance(GetPlayer().position, transform.position) <= defaultAttackRadius)
             {
-                Instantiate(fire_VFX, transform.position, Quaternion.identity, null);
+                ExplosionManager.instance.CreateExplosion(transform, 6, 10, 25);
                 Destroy(gameObject);
             }
 

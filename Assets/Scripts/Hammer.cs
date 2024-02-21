@@ -17,6 +17,7 @@ public class Hammer : MonoBehaviour
     [SerializeField] Transform _playerModel;
     [SerializeField] UnityEvent onHammerHit;
     [SerializeField] float enemieKnockBackImpact = 10f;
+    [SerializeField] GameObject impactParticleEffect;
     [Header("Ground Pound Properties")]
     [SerializeField] float impactPower = 10f;
     [SerializeField] List<AudioClip> hammerPoundAudioClips;
@@ -134,6 +135,7 @@ public class Hammer : MonoBehaviour
         Debug.Log(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
         if ( !enemiesAttacked.Contains(other) && abilityInProgress&&other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "swing smooth")
         {
+            GameObject impactEffect = Instantiate(impactParticleEffect, other.transform.position, Quaternion.identity);
             enemiesAttacked.Add(other);
             Vector3 hitDir = other.transform.position - transform.position;
             onHammerHit.Invoke();

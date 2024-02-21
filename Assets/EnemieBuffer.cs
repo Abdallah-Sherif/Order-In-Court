@@ -20,19 +20,16 @@ public class EnemieBuffer : EnemyBase
         foreach (Collider collider in hits)
         {
             Debug.Log(collider.gameObject.name);
-            StartCoroutine(addBuffEffect(collider));
+            addBuffEffect(collider);
         }
         DisableAnyAttackState();
     }
-    IEnumerator addBuffEffect(Collider collider)
+    void addBuffEffect(Collider collider)
     {
         Health health= collider.GetComponent<Health>();
         Transform col_trans = collider.transform;
         Vector3 col_scale = col_trans.localScale;
         col_trans.localScale *=2;
         health.health += (int)(health.health * 0.5f);
-        yield return new WaitForSeconds(buffTime);
-        
-        health.health -= (int)(health.health * 0.5f);
     }
 }

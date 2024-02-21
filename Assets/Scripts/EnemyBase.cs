@@ -50,6 +50,8 @@ public class EnemyBase : MonoBehaviour
 
     bool canDefaultAttack = true;
     bool canSpecialAttack = true;
+    public bool isBuffed = false;
+    public float nearp_p = 0;
     [Header("34an sleem 2aly a3ml header")]
     [SerializeField] UnityEvent onStun;
     [SerializeField] UnityEvent onUnStun;
@@ -148,7 +150,7 @@ public class EnemyBase : MonoBehaviour
         if(state == State.Dead) state = State.Dead;
             
 
-        float nearp_p = Vector3.Distance(nearestPlayer.position, transform.position);
+        nearp_p = Vector3.Distance(nearestPlayer.position, transform.position);
 
         if (nearp_p <= detectionRadius)
         {
@@ -276,7 +278,7 @@ public class EnemyBase : MonoBehaviour
             specialAttackEvent.Invoke();
 
             canSpecialAttack = false;
-            state = State.Null;
+            state = State.chasing;
             yield return new WaitForSeconds(specialAttackCoolDown);
 
             canSpecialAttack = true;

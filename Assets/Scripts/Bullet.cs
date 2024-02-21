@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     string tag;
     [SerializeField] UnityEvent onHit;
+    [SerializeField] int bulletLayer;
     bool isDying = false;
     public bool activateExpo = false;
     void Start()
@@ -24,17 +25,17 @@ public class Bullet : MonoBehaviour
     IEnumerator ChangeLayer()
     {
         yield return new WaitForSeconds(0.1f);
-        ChangeLayer(this.gameObject, 0);
+        ChangeLayer(this.gameObject);
     }
-    void ChangeLayer(GameObject targetObject, int newLayer)
+    void ChangeLayer(GameObject targetObject)
     {
-        targetObject.layer = newLayer;
+        targetObject.layer = bulletLayer;
         foreach (Transform child in targetObject.transform)
         {
-            ChangeLayer(child.gameObject, newLayer);
+            ChangeLayer(child.gameObject);
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (isDying) return;
         if (activateExpo)
@@ -46,7 +47,6 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
         GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<BoxCollider>().isTrigger= true;
         isDying= true;
         if (collision.transform.tag == tag ) return;
         Health health = collision.gameObject.GetComponent<Health>();

@@ -9,13 +9,13 @@ public class testMeshAgent : MonoBehaviour
     NavMeshAgent navMeshAgent;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
+        //navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        navMeshAgent.SetDestination(player.transform.position);
+        //navMeshAgent.SetDestination(player.transform.position);
     }
 }

@@ -25,7 +25,7 @@ public class EnemyBase : MonoBehaviour
     [Header("Projectiles")]
     [SerializeField] private bool hasProjectile;
     public GameObject dummyAim;
-    [SerializeField] private GameObject[] projectile;
+    [SerializeField] protected GameObject[] projectiles;
 
     [Header("Navigation")] [SerializeField]
     private float detectionRadius;
@@ -40,18 +40,20 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private float distanceToStop = 4;
 
     [Header("EnemyProperties")]
-    [Range(2, 20)]
+    [Range(0, 20)]
     [SerializeField] private float defaultAttackCoolDown;
     [SerializeField] private UnityEvent defaultAttackEvent;
-    [Range(2, 20)]
+    [Range(0, 20)]
     [SerializeField] private float specialAttackCoolDown;
     [SerializeField] private UnityEvent specialAttackEvent;
+    [SerializeField] bool hasSpecial = false;
 
     bool canDefaultAttack = true;
     bool canSpecialAttack = true;
     [Header("34an sleem 2aly a3ml header")]
     [SerializeField] UnityEvent onStun;
     [SerializeField] UnityEvent onUnStun;
+
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -127,7 +129,7 @@ public class EnemyBase : MonoBehaviour
 
         void DummyAim()
         {
-            dummyAim.transform.LookAt(nearestPlayer);
+            dummyAim.transform.forward = nearestPlayer.transform.position - transform.position;
 
             Debug.DrawRay(dummyAim.transform.position, dummyAim.transform.forward, Color.red);
         }
@@ -136,19 +138,22 @@ public class EnemyBase : MonoBehaviour
 
         //
 
-        if (isAttacking || state == State.Stun) 
+        if (state == State.Stun)
+        {
+            animator.gameObject.transform.forward = -rb.velocity;
+        }
+
+        if (isAttacking || state == State.Stun || state == State.Dead) 
         { return; }
+        if(state == State.Dead) state = State.Dead;
             
 
         float nearp_p = Vector3.Distance(nearestPlayer.position, transform.position);
 
         if (nearp_p <= detectionRadius)
         {
-            if (specialAttackRadius != 0 && canSpecialAttack && nearp_p <= specialAttackRadius && nearp_p > defaultOuterAttackRadius && nearp_p > defaultAttackRadius)
-            {
-                state = State.specialAttack;
-            }
-            else if (nearp_p <= defaultOuterAttackRadius && nearp_p >= defaultAttackRadius)
+            
+            if (nearp_p <= defaultOuterAttackRadius && nearp_p >= defaultAttackRadius)
             {
                 state = State.chasing;
             }
@@ -181,26 +186,34 @@ public class EnemyBase : MonoBehaviour
             case State.specialAttack:
                 SpecialAttack();
                 break;
-            case State.Stun:
-                Stun();
-                break;
         }
-
+        if(hasSpecial && (state == State.chasing || state == State.defaultAttack) && canSpecialAttack)
+        {
+            SpecialAttack();
+            state = State.specialAttack;
+        }
     }
-
+    public void SetStateToDead()
+    {
+        state = State.Dead;
+    }
+    IEnumerator AbilityCooldown(Ability ability)
+    {
+        yield return new WaitForSeconds(ability.coolDown);
+        ability.canCast = true;
+    }
     public void GetStunned()
     {
-        state = State.Stun;
+        state = State.Stun;    
         StartCoroutine(stunDelay());
-    }
-    void Stun()
-    {
-        
     }
     IEnumerator stunDelay()
     {
         onStun.Invoke();
+        animator.SetBool("isStunned" , true);
         yield return new WaitForSeconds(1f);
+        animator.gameObject.transform.localEulerAngles = Vector3.zero;
+        animator.SetBool("isStunned", false);
         onUnStun.Invoke();
         state = State.chasing;
     }
@@ -209,8 +222,6 @@ public class EnemyBase : MonoBehaviour
     {
         if (state == State.defaultAttack || state == State.specialAttack)
             return;
-
-        if (animator == null) return;
 
         animator.SetBool("isWalk", (rb.velocity.magnitude > 0.3f));
         animator.SetFloat("walkSpeed", Mathf.Clamp(rb.velocity.magnitude, 0, 1));
@@ -265,7 +276,7 @@ public class EnemyBase : MonoBehaviour
             specialAttackEvent.Invoke();
 
             canSpecialAttack = false;
-
+            state = State.Null;
             yield return new WaitForSeconds(specialAttackCoolDown);
 
             canSpecialAttack = true;
@@ -274,9 +285,6 @@ public class EnemyBase : MonoBehaviour
 
     void DefaultAttack()
     {
-
-        Debug.Log("attackk starteed");
-
         isAttacking = true;
         StartCoroutine(delay());
 
@@ -299,10 +307,7 @@ public class EnemyBase : MonoBehaviour
     public void DisableAnyAttackState()
     {
         isAttacking = false;
-        //animator.SetBool("isAttack" , false);
         state = State.Null;
-
-        Debug.Log("attackk ended");
     }
     //
 
@@ -311,7 +316,7 @@ public class EnemyBase : MonoBehaviour
         if (hasProjectile == false)
             return null;
 
-        GameObject g = Instantiate(projectile[projectileID], dummyAim.transform.position , dummyAim.transform.rotation);
+        GameObject g = Instantiate(projectiles[projectileID], dummyAim.transform.position , Quaternion.LookRotation( GetPlayer().transform.position - transform.position));
         g.GetComponent<Rigidbody>().AddForce(g.transform.forward * Force * Time.deltaTime , ForceMode.Impulse);
 
         if (DestroyLater)
@@ -376,6 +381,7 @@ public enum State
     defaultAttack,
     specialAttack,
     Stun,
+    Dead,
     Null
 }
 

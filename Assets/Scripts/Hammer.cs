@@ -17,6 +17,7 @@ public class Hammer : MonoBehaviour
     [SerializeField] Transform _playerModel;
     [SerializeField] UnityEvent onHammerHit;
     [SerializeField] float enemieKnockBackImpact = 10f;
+    [SerializeField] GameObject impactParticleEffect;
     [Header("Ground Pound Properties")]
     [SerializeField] float impactPower = 10f;
     [SerializeField] List<AudioClip> hammerPoundAudioClips;
@@ -81,6 +82,7 @@ public class Hammer : MonoBehaviour
         foreach(Collider collider in hits)
         {
             collider.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * impactPower, ForceMode.Impulse);
+            collider.GetComponent<Health>().TakeDamage(50,"Hammer");
         }    
     }
     private void OnDrawGizmos()
@@ -133,6 +135,7 @@ public class Hammer : MonoBehaviour
         Debug.Log(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
         if ( !enemiesAttacked.Contains(other) && abilityInProgress&&other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "swing smooth")
         {
+            GameObject impactEffect = Instantiate(impactParticleEffect, other.transform.position, Quaternion.identity);
             enemiesAttacked.Add(other);
             Vector3 hitDir = other.transform.position - transform.position;
             onHammerHit.Invoke();
@@ -153,8 +156,9 @@ public class Hammer : MonoBehaviour
         Rigidbody rb_temp = collider.GetComponent<Rigidbody>();
         rb_temp.isKinematic = true;
         yield return new WaitForSeconds(0.2f);
+        if(rb_temp != null)
         rb_temp.isKinematic = false;
-        collider.GetComponent<Health>().TakeDamage(20);
+        collider.GetComponent<Health>().TakeDamage(20,"Hammer");
         if(collider.GetComponent<Health>().health <= 0) 
         {
             AudioFxManager.instance.PlaySoundEffect(EnemieDeathSFX, collider.transform, 1f);

@@ -92,6 +92,8 @@ public class EnemyBase : MonoBehaviour
     public void FixedUpdate()
     {
 
+        if (state == State.Dead) { rb.isKinematic = true;  enabled = false; }
+
         UpdateNavMeshPath();
 
         void UpdateNavMeshPath()
@@ -218,7 +220,7 @@ public class EnemyBase : MonoBehaviour
     {
         isDead = true;
         no_Enemies -= 1;
-        state = State.Null;
+        state = State.Dead;
     }
     IEnumerator AbilityCooldown(Ability ability)
     {

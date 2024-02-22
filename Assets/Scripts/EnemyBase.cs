@@ -12,6 +12,8 @@ using URC.Core;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyBase : MonoBehaviour
 {
+    public static int no_Enemies = 0;
+
 
     private NavMeshPath NMP;
     private bool isStopped = false;
@@ -51,13 +53,13 @@ public class EnemyBase : MonoBehaviour
 
     bool canDefaultAttack = true;
     bool canSpecialAttack = true;
-    public bool isBuffed = false;
     [Header("34an sleem 2aly a3ml header")]
     [SerializeField] UnityEvent onStun;
     [SerializeField] UnityEvent onUnStun;
 
     [SerializeField] private string corner;
 
+    public bool isDead = false;
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -89,6 +91,7 @@ public class EnemyBase : MonoBehaviour
 
     public void FixedUpdate()
     {
+
         UpdateNavMeshPath();
 
         void UpdateNavMeshPath()
@@ -105,7 +108,8 @@ public class EnemyBase : MonoBehaviour
         }
 
         bool braking = true;
-        
+
+        if (isDead) return;
         Move();
 
         void Move()
@@ -161,7 +165,9 @@ public class EnemyBase : MonoBehaviour
 
         if (isAttacking || state == State.Stun || state == State.Dead) 
         { return; }
-        if(state == State.Dead) state = State.Dead;
+
+
+
 
 
         float nearp_p = Vector3.Distance(nearestPlayer.position, transform.position);
@@ -210,7 +216,9 @@ public class EnemyBase : MonoBehaviour
     }
     public void SetStateToDead()
     {
-        state = State.Dead;
+        isDead = true;
+        no_Enemies -= 1;
+        state = State.Null;
     }
     IEnumerator AbilityCooldown(Ability ability)
     {

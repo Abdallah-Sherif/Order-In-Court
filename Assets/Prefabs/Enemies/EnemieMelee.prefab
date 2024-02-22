@@ -165,8 +165,8 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  speed: 100
-  acceleration: 4
+  speed: 10
+  acceleration: 10
   distanceToStop: 1
   defaultAttackCoolDown: 2
   defaultAttackEvent:
@@ -201,7 +201,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hasSpecial: 0
-  isBuffed: 0
   onStun:
     m_PersistentCalls:
       m_Calls:
@@ -233,8 +232,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   corner: 
+  isDead: 0
   enemieAttackRate: 1
   meleeDamage: 25
+  isBuffed: 0
 --- !u!208 &41090604871575424
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -281,16 +282,16 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4544306355904636713}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
+      - m_Target: {fileID: 2313921180385911800}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: isDeath
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6480304074032202626}
@@ -302,11 +303,12 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: isDeath
           m_BoolArgument: 0
         m_CallState: 2
   health: 100
   maxHealth: 100
+  isBuffed: 0
 --- !u!1 &6811159066232369314
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +362,26 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874172501540107119, guid: 06ef0fd037c6dfe4a9397540662e933e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874172501540107119, guid: 06ef0fd037c6dfe4a9397540662e933e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874172501540107119, guid: 06ef0fd037c6dfe4a9397540662e933e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874172501540107119, guid: 06ef0fd037c6dfe4a9397540662e933e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.05
       objectReference: {fileID: 0}
     - target: {fileID: 5295265787474462747, guid: 06ef0fd037c6dfe4a9397540662e933e,
         type: 3}
@@ -459,17 +481,17 @@ PrefabInstance:
     - target: {fileID: 1919204573192399909, guid: 6dfe666feb52ff1459587660c72cefc1,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1919204573192399909, guid: 6dfe666feb52ff1459587660c72cefc1,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1919204573192399909, guid: 6dfe666feb52ff1459587660c72cefc1,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1919204573192399909, guid: 6dfe666feb52ff1459587660c72cefc1,
         type: 3}

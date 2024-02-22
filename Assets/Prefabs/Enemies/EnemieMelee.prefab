@@ -166,7 +166,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   speed: 10
-  acceleration: 10
+  acceleration: 3
   distanceToStop: 1
   defaultAttackCoolDown: 2
   defaultAttackEvent:
@@ -296,7 +296,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 6480304074032202626}
         m_TargetAssemblyTypeName: EnemyBase, Assembly-CSharp
-        m_MethodName: SetStateToDead
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

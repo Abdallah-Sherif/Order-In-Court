@@ -41,6 +41,7 @@ public class Bullet : MonoBehaviour
         if (activateExpo)
         {
             onHit.Invoke();
+            ExplosionManager.instance.CreateExplosion(transform, 1, 2, 25,true);
             Destroy(gameObject, 1.5f);
         }else
         {

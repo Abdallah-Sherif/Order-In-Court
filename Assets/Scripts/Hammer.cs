@@ -66,7 +66,7 @@ public class Hammer : MonoBehaviour
         ability1.abilityLogicStart = delegate
         {
             anim.SetTrigger("hammerPound");
-            AudioFxManager.instance.PlayPlayerFX(hammerPoundAudioClips[Random.Range(0, hammerPoundAudioClips.Count)], 1f,true);
+            AudioFxManager.instance.PlayPlayerFX(hammerPoundAudioClips[Random.Range(0, hammerPoundAudioClips.Count)], 3f,true);
             AudioFxManager.instance.PlaySoundEffect(hammerClickSFX, transform, 2f);
 
         };

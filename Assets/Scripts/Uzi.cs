@@ -1,10 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
-
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using URC.Core;
 public class Uzi : MonoBehaviour
 {
     [Header("Bullet Properties")]
@@ -19,7 +24,8 @@ public class Uzi : MonoBehaviour
     [SerializeField] float ability1Cooldown;
     public bool abilityInProgress = false;
     private Ability ability0, ability1,ability2;
-
+    [SerializeField]
+    List<AudioClip> abilitySounds;
     [SerializeField] Animator anim;
     [SerializeField] AudioClip shootAudioClip;
 
@@ -53,6 +59,7 @@ public class Uzi : MonoBehaviour
         ability1.coolDown = ability1Cooldown;
         ability1.abilityLogicStart = delegate 
         {
+            AudioFxManager.instance.PlayPlayerFX(abilitySounds[UnityEngine.Random.Range(0, abilitySounds.Count)], 3f, true);
             ability0.coolDown /= 2;
             anim.speed= 2;
         };

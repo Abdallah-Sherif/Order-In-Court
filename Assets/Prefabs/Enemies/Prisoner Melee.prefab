@@ -201,7 +201,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hasSpecial: 0
-  isBuffed: 0
   onStun:
     m_PersistentCalls:
       m_Calls:
@@ -232,8 +231,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  corner: 
+  isDead: 0
   enemieAttackRate: 1
   meleeDamage: 25
+  isBuffed: 0
 --- !u!208 &7919940783980702965
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -306,6 +308,7 @@ MonoBehaviour:
         m_CallState: 2
   health: 500
   maxHealth: 2000
+  isBuffed: 0
 --- !u!1 &5861528755184312386
 GameObject:
   m_ObjectHideFlags: 0

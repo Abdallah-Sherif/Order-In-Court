@@ -8,6 +8,8 @@ public class spawner : MonoBehaviour
     [SerializeField] GameObject[] enemies;
     [SerializeField] float spawnrate;
     [SerializeField] int spawnLimit = 20;
+    [SerializeField] float spawnRadius;
+    [SerializeField] Transform otherspawn;
     bool breakOut = true;
     bool canSpawn = true;
     void Start()
@@ -26,13 +28,15 @@ public class spawner : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnrate);
         breakOut = true;
-        Instantiate(enemies[Random.Range(0 , enemies.Length)] , RandomLocationNav(transform.position, 100) , Quaternion.identity);
+        Vector3[] bob = new Vector3[2] { otherspawn.position , transform.position };
+        Instantiate(enemies[Random.Range(0 , enemies.Length)] , RandomLocationNav(bob[Random.Range(0 , 2)], spawnRadius) , Quaternion.identity);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, 100);
+        Gizmos.DrawSphere(transform.position, spawnRadius);
+        Gizmos.DrawSphere(otherspawn.position, spawnRadius);
     }
 
     public static Vector3 RandomLocationNav(Vector3 center, float maxDistance)

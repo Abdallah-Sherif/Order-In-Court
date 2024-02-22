@@ -67,6 +67,13 @@ public class EnemyBase : MonoBehaviour
         target = transform.position;
     }
 
+    public void Dead()
+    {
+        speed = 0;
+        acceleration = 0;
+        state = State.Dead;
+    }
+
     private void OnDrawGizmos()
     {
         //draw gizmos
@@ -169,9 +176,6 @@ public class EnemyBase : MonoBehaviour
         { return; }
 
 
-
-
-
         float nearp_p = Vector3.Distance(nearestPlayer.position, transform.position);
         if (nearp_p <= detectionRadius)
         {
@@ -217,7 +221,7 @@ public class EnemyBase : MonoBehaviour
         }
     }
     public void SetStateToDead()
-    {
+    {     
         isDead = true;
         no_Enemies -= 1;
         state = State.Dead;

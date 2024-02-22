@@ -67,6 +67,13 @@ public class EnemyBase : MonoBehaviour
         target = transform.position;
     }
 
+    public void Dead()
+    {
+        speed = 0;
+        acceleration = 0;
+        state = State.Dead;
+    }
+
     private void OnDrawGizmos()
     {
         //draw gizmos
@@ -91,6 +98,8 @@ public class EnemyBase : MonoBehaviour
 
     public void FixedUpdate()
     {
+
+        if (state == State.Dead) { rb.isKinematic = true;  enabled = false; }
 
         UpdateNavMeshPath();
 
@@ -167,9 +176,6 @@ public class EnemyBase : MonoBehaviour
         { return; }
 
 
-
-
-
         float nearp_p = Vector3.Distance(nearestPlayer.position, transform.position);
         if (nearp_p <= detectionRadius)
         {
@@ -215,10 +221,10 @@ public class EnemyBase : MonoBehaviour
         }
     }
     public void SetStateToDead()
-    {
+    {     
         isDead = true;
         no_Enemies -= 1;
-        state = State.Null;
+        state = State.Dead;
     }
     IEnumerator AbilityCooldown(Ability ability)
     {

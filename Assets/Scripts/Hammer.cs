@@ -66,7 +66,7 @@ public class Hammer : MonoBehaviour
         ability1.abilityLogicStart = delegate
         {
             anim.SetTrigger("hammerPound");
-            AudioFxManager.instance.PlayPlayerFX(hammerPoundAudioClips[Random.Range(0, hammerPoundAudioClips.Count)], 1f,true);
+            AudioFxManager.instance.PlayPlayerFX(hammerPoundAudioClips[Random.Range(0, hammerPoundAudioClips.Count)], 3f,true);
             AudioFxManager.instance.PlaySoundEffect(hammerClickSFX, transform, 2f);
 
         };
@@ -152,12 +152,16 @@ public class Hammer : MonoBehaviour
     }
     IEnumerator EnemieTimeEffect(Collider collider,Vector3 hitDir)
     {
+        if (collider == null) yield break;
+
         Rigidbody rb_temp = collider.GetComponent<Rigidbody>();
         rb_temp.isKinematic = true;
         yield return new WaitForSeconds(0.2f);
-        if(rb_temp != null)
+
+        if (collider == null) yield break;
+
+        if (rb_temp != null)
         rb_temp.isKinematic = false;
-        if (collider == null) yield return null; 
         collider.GetComponent<Health>().TakeDamage(20,"Hammer");
         if(collider.GetComponent<Health>().health <= 0) 
         {

@@ -165,8 +165,8 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  speed: 100
-  acceleration: 4
+  speed: 10
+  acceleration: 3
   distanceToStop: 1
   defaultAttackCoolDown: 1
   defaultAttackEvent:
@@ -295,18 +295,6 @@ MonoBehaviour:
           m_StringArgument: isDeath
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6513520357642113033}
-        m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
-        m_MethodName: set_isKinematic
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: isDeath
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 4997469970923969375}
         m_TargetAssemblyTypeName: EnemyBase, Assembly-CSharp
         m_MethodName: SetStateToDead
@@ -319,7 +307,7 @@ MonoBehaviour:
           m_StringArgument: isDeath
           m_BoolArgument: 1
         m_CallState: 2
-  health: 1
+  health: 100
   maxHealth: 100
   isBuffed: 0
 --- !u!1 &3652964401323226768

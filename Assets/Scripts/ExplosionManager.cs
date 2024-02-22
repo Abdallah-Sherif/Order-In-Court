@@ -7,6 +7,7 @@ public class ExplosionManager : MonoBehaviour
     public static ExplosionManager instance;
     [Header("Explosion Prefab")]
     [SerializeField] GameObject ExplosionSFX;
+    [SerializeField] GameObject bulletExplosionSFX;
     [SerializeField] List<AudioClip> explosionSounds;
     // Start is called before the first frame update
     private void Awake()
@@ -17,10 +18,17 @@ public class ExplosionManager : MonoBehaviour
     {
         
     }
-    public void CreateExplosion(Transform point,float radius,float impact,int damage)
+    public void CreateExplosion(Transform point,float radius,float impact,int damage,bool isBullet = false)
     {
-        GameObject newExplosion = Instantiate(ExplosionSFX,point.position,Quaternion.identity);
-        AudioFxManager.instance.PlaySoundEffect(explosionSounds[Random.Range(0, explosionSounds.Count)], point, 1);
+        if(isBullet)
+        {
+            GameObject newExplosion = Instantiate(bulletExplosionSFX, point.position, Quaternion.identity);
+        }
+        else
+        {
+            GameObject newExplosion = Instantiate(ExplosionSFX, point.position, Quaternion.identity);
+        }
+        AudioFxManager.instance.PlaySoundEffect(explosionSounds[Random.Range(0, explosionSounds.Count)], point, 0.2f);
         Collider[] hits = Physics.OverlapSphere(point.position, radius);
         foreach (Collider collider in hits)
         {

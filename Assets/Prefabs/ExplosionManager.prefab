@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExplosionSFX: {fileID: 4593184484909914552, guid: 41fd55572a7c48c43986003c85f99b7d,
     type: 3}
+  bulletExplosionSFX: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312,
+    type: 3}
   explosionSounds:
   - {fileID: 8300000, guid: 6e2319beee657954cba476620d0de4c8, type: 3}
   - {fileID: 8300000, guid: aeeb3448da3a8c944a584059734150c3, type: 3}

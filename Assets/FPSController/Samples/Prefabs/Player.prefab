@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 1931249308813141063}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,7 +189,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118975850155193173}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 200
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -369,6 +369,7 @@ MonoBehaviour:
       m_Calls: []
   health: 10000
   maxHealth: 10000
+  isBuffed: 0
 --- !u!1 &2118975851282553941
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,11 +381,12 @@ GameObject:
   - component: {fileID: 2118975851282553938}
   - component: {fileID: 2118975851282554028}
   - component: {fileID: 2118975851282554031}
-  - component: {fileID: 2118975851282554030}
   - component: {fileID: 2118975851282553937}
   - component: {fileID: 2118975851282553936}
   - component: {fileID: 3520949380009845163}
   - component: {fileID: 1785955351619295020}
+  - component: {fileID: 1031304365090834017}
+  - component: {fileID: 6437777694081153665}
   m_Layer: 0
   m_Name: URC Modules
   m_TagString: Untagged
@@ -469,26 +471,6 @@ MonoBehaviour:
     Enabled: 1
     Audio: {fileID: 11400000, guid: 9bd6c3bd238c0c8428b3a84606893ce7, type: 2}
     WeightedRandom: 0
---- !u!114 &2118975851282554030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118975851282553941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4528a1cd14b59314dacab7899d08ae99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_crouchKey: 306
-  m_isToggle: 0
-  m_mustStartOnGround: 1
-  m_stopOnGroundLeave: 1
-  m_sizeReduction: 0.5
-  m_shrinkingSpeed: 5
-  m_growthSpeed: 5
-  m_speedReduction: 0.5
 --- !u!114 &2118975851282553937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,7 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2a2953f3045f74f8eff4df15ff49af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DashSpeed: 25
+  DashSpeed: 6000
   m_dashKey: 304
   dashCooldown: 1
 --- !u!114 &1785955351619295020
@@ -572,9 +554,77 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceLines:
-  - {fileID: 8300000, guid: 1c8a060e1cbfddc45b3e668197e21f5e, type: 3}
-  - {fileID: 8300000, guid: bf3da725f6b4529428dab8d89d8efa80, type: 3}
-  - {fileID: 8300000, guid: 7d97fe6bee5a8754dab5813541082abc, type: 3}
+  - {fileID: 8300000, guid: 81978b5af37e82a4795cbbcafe0464ff, type: 3}
+  - {fileID: 8300000, guid: b4960a3c3e0a6bf4cbdfbcb7ec0d2408, type: 3}
+  - {fileID: 8300000, guid: f31cbf50dbc8c894fb09bbea0dca5fff, type: 3}
+  - {fileID: 8300000, guid: d73f27462b855204b83b9e95e794ce3a, type: 3}
+  - {fileID: 8300000, guid: ce145ad064a47c8419532ce394f93b6c, type: 3}
+  - {fileID: 8300000, guid: 87dd630ac837d6247b8f64d7c6cd17cb, type: 3}
+  - {fileID: 8300000, guid: 6db5a009594ec9e448b3b62e5fe2ff58, type: 3}
+  - {fileID: 8300000, guid: ba4749107330fd54bafba41bc5bf88d0, type: 3}
+  - {fileID: 8300000, guid: caf73f035675ad34b820990d96ca566b, type: 3}
+  - {fileID: 8300000, guid: e7a5e2b50a719a842a364701fbce9b2e, type: 3}
+  - {fileID: 8300000, guid: 25c430372f6744f4290bdfdc96db4b80, type: 3}
+  - {fileID: 8300000, guid: 5d9b7d11e9cb61144b4cc83e0ecfc293, type: 3}
+  - {fileID: 8300000, guid: 41c305609e362a246a67973cc8a0067b, type: 3}
   onAbility:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1031304365090834017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118975851282553941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7346a0aadab5d0c4e924e118472d7b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfObjectivesToComplete: 4
+  onObjectiveComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  findEnemies: 0
+--- !u!114 &6437777694081153665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118975851282553941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7346a0aadab5d0c4e924e118472d7b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfObjectivesToComplete: 3
+  onObjectiveComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  findEnemies: 0

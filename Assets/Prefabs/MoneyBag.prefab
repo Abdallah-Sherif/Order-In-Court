@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6742264632194752639}
   - component: {fileID: 2180526841164804715}
   - component: {fileID: 4124431641991599609}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 2702790133409825328}
   - component: {fileID: 2394591175683360465}
   - component: {fileID: 880582159398695995}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: MoneyBag
   m_TagString: Untagged
   m_Icon: {fileID: 0}

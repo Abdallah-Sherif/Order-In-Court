@@ -10,9 +10,9 @@ public class Health : MonoBehaviour
 
     public int health = 100;
     public int maxHealth;
-
     public void TakeDamage(int damage,string weaponUsed = "")
     {
+        if (health <= 0) return;
         health -= damage;
         if(health <= 0)
         {

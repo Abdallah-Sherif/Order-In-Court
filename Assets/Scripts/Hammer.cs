@@ -132,7 +132,7 @@ public class Hammer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if ( !enemiesAttacked.Contains(other) && abilityInProgress&&other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "swing smooth")
+        if (!enemiesAttacked.Contains(other) && abilityInProgress&&other.transform.tag == "Enemie" && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "swing smooth")
         {
             GameObject impactEffect = Instantiate(impactParticleEffect, other.transform.position, Quaternion.identity);
             enemiesAttacked.Add(other);

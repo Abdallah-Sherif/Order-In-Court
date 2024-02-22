@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -12,6 +13,14 @@ public class Health : MonoBehaviour
     public int maxHealth;
 
     public bool isBuffed = false;
+
+    [SerializeField] AudioClip playerDeathClip;
+    [SerializeField] Slider playerHealthSlider;
+
+    private void Update()
+    {
+        if(playerDeathClip != null)playerHealthSlider.value = health;
+    }
     public void TakeDamage(int damage,string weaponUsed = "")
     {
         if (health <= 0) return;
@@ -19,9 +28,13 @@ public class Health : MonoBehaviour
         if(health <= 0)
         {
             onDeath.Invoke();
-            Destroy(gameObject,3);
+            if(playerDeathClip == null) Destroy(gameObject,3);
             return;
         }
         if(weaponUsed == "Hammer") onHit.Invoke();
+    }
+    public void onPlayerDeath()
+    {
+        AudioFxManager.instance.PlayPlayerFX(playerDeathClip, 3f, true);
     }
 }

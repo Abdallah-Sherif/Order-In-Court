@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using URC.Utility;
 using URC.Core;
+using UnityEngine.InputSystem.Processors;
 
 namespace URC.Camera
 {
@@ -78,7 +79,7 @@ namespace URC.Camera
         [Header("Others")]
         [Tooltip("Optional settings that does not need to be changed by default")]
         public AdvancedCameraSettings m_advancedSettings;
-
+        private bool isDead = false;
         #endregion
 
         #region Private variables
@@ -92,6 +93,12 @@ namespace URC.Camera
         #endregion
 
         #region Unity methods
+        public void setDead()
+        {
+            isDead = true;
+            Cursor.lockState= CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
         private void Awake()
         {
@@ -100,6 +107,7 @@ namespace URC.Camera
 
         private void LateUpdate()
         {
+            if(isDead) return;
             if (InputHelper.getDisableLooking()) return;
             UpdateRotation();
             UpdatePosition();
@@ -107,6 +115,7 @@ namespace URC.Camera
 
         private void FixedUpdate()
         {
+            if (isDead) return;
             UpdatePlayerRotation();
         }
 

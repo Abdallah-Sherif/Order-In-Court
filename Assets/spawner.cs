@@ -14,7 +14,7 @@ public class spawner : MonoBehaviour
     bool canSpawn = true;
     void Start()
     {
-        //StartCoroutine(delay());
+        EnemyBase.no_Enemies = 0;
     }
     private void Update()
     {

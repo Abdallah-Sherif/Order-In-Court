@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 725748389098120093, guid: 4bda94453d2ca7444a0fff05b2d425f5,
         type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 725748389098120094, guid: 4bda94453d2ca7444a0fff05b2d425f5,
         type: 3}
@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: 725748389856807712, guid: 4bda94453d2ca7444a0fff05b2d425f5,
         type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 725748389856807713, guid: 4bda94453d2ca7444a0fff05b2d425f5,
         type: 3}
@@ -38,15 +38,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: CFXR Explosion Smoke 2 Solo (HDR)
       objectReference: {fileID: 0}
-    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5,
+    - target: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5,
         type: 3}
-      propertyPath: m_LocalPosition.x
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.641
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5,
+        type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.322
+      value: -0.77
       objectReference: {fileID: 0}
     - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5,
         type: 3}
@@ -96,12 +101,12 @@ PrefabInstance:
     - target: {fileID: 725748390055121439, guid: 4bda94453d2ca7444a0fff05b2d425f5,
         type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 725748390129463915, guid: 4bda94453d2ca7444a0fff05b2d425f5,
         type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 725748390129463916, guid: 4bda94453d2ca7444a0fff05b2d425f5,
         type: 3}
@@ -152,9 +157,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3429383720674358447}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &2703846443247435663 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 725748389856807712, guid: 4bda94453d2ca7444a0fff05b2d425f5,
+--- !u!1 &2703846443247435661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5,
     type: 3}
   m_PrefabInstance: {fileID: 3429383720674358447}
   m_PrefabAsset: {fileID: 0}
@@ -169,17 +174,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 36160da57330aec4b9927bf30d043ab6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.08
+      value: 38.51422
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36160da57330aec4b9927bf30d043ab6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.63
+      value: 1.69
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36160da57330aec4b9927bf30d043ab6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.09
+      value: 32.09608
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36160da57330aec4b9927bf30d043ab6,
         type: 3}
@@ -395,17 +400,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2703846443247435663}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
+      - m_Target: {fileID: 2703846443247435661}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   health: 100
   maxHealth: 100

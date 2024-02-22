@@ -134,7 +134,7 @@ public class ChangeText : MonoBehaviour
     IEnumerator special2Delay()
     {
         ModifyText("Explore the map – hunt down unique objectives like the golden PC and unleash destruction upon it!");
-        Enemy.SetActive(false);
+        if(Enemy != null) Enemy.SetActive(false);
         yield return new WaitForSeconds(3);
         pc.SetActive(true);
         bigLight.enabled = false;

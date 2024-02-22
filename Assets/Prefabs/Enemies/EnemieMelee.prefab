@@ -98,7 +98,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4883573763080330909}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0299525eaa70f5c44aabf521c4bc0b5e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -165,9 +165,9 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  speed: 200
-  acceleration: 10
-  distanceToStop: 0.1
+  speed: 100
+  acceleration: 4
+  distanceToStop: 1
   defaultAttackCoolDown: 2
   defaultAttackEvent:
     m_PersistentCalls:
@@ -182,6 +182,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2313921180385911800}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: isAttack
           m_BoolArgument: 0
         m_CallState: 2
   specialAttackCoolDown: 0
@@ -220,6 +232,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  corner: 
   enemieAttackRate: 1
   meleeDamage: 25
 --- !u!208 &41090604871575424

@@ -56,6 +56,8 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] UnityEvent onStun;
     [SerializeField] UnityEvent onUnStun;
 
+    [SerializeField] private string corner;
+
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -74,6 +76,15 @@ public class EnemyBase : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, defaultOuterAttackRadius);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, specialAttackRadius);
+
+        if (NMP.corners.Length <= 1)
+            return;
+
+        foreach (var item in NMP.corners)
+        {
+            Gizmos.color = Color.gray;
+            Gizmos.DrawCube(item , new Vector3(.1f, .1f, .1f));
+        }
     }
 
     public void FixedUpdate()
@@ -85,7 +96,9 @@ public class EnemyBase : MonoBehaviour
             if (isStopped)
                 return;
 
-            NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, NMP);
+            NavMeshHit hitR;
+            NavMesh.SamplePosition(transform.position, out hitR , 50000 , -1);
+            NavMesh.CalculatePath(hitR.position, target, NavMesh.AllAreas, NMP);
 
             for (int i = 0; i < NMP.corners.Length - 1; i++)
                 Debug.DrawLine(NMP.corners[i], NMP.corners[i + 1], Color.red);
@@ -97,13 +110,13 @@ public class EnemyBase : MonoBehaviour
 
         void Move()
         {
-            if (NMP.corners.Length <= 1)
+            if (NMP.corners.Length < 2 || state == State.Stun)
                 return;
 
             if (Vector3.Distance(transform.position, target) > distanceToStop)
             {
                 LookAt(NMP.corners[1], 15);
-                rb.AddForce((NMP.corners[1] - transform.position).normalized * speed * Time.deltaTime, ForceMode.Acceleration);
+                rb.AddForce((NMP.corners[1] - NMP.corners[0]).normalized * speed * Time.deltaTime, ForceMode.VelocityChange);
 
                 braking = true;
             }
@@ -112,7 +125,7 @@ public class EnemyBase : MonoBehaviour
                 if (braking == true)
                 {
                     Debug.Log("brake");
-                    rb.AddForce(-rb.velocity.normalized * Time.deltaTime * (speed / 4), ForceMode.Acceleration);
+                    rb.AddForce(-rb.velocity.normalized * Time.deltaTime * (speed / 4), ForceMode.VelocityChange);
                     braking = false;
                 }
             }
@@ -213,7 +226,22 @@ public class EnemyBase : MonoBehaviour
     {
         onStun.Invoke();
         animator.SetBool("isStunned" , true);
-        yield return new WaitForSeconds(1f);
+
+        float delay = 0;
+
+        if (CheckGround())
+        {
+            delay = 3;
+        }
+
+        yield return new WaitForSeconds(1f + delay);
+
+        if (!CheckGround())
+        {
+            StartCoroutine(stunDelay());
+            yield break;
+        }
+
         animator.gameObject.transform.localEulerAngles = Vector3.zero;
         animator.SetBool("isStunned", false);
         onUnStun.Invoke();
@@ -283,6 +311,12 @@ public class EnemyBase : MonoBehaviour
 
             canSpecialAttack = true;
         }
+    }
+
+    public bool CheckGround()
+    {
+        float _distanceToTheGround = GetComponent<Collider>().bounds.extents.y;
+        return Physics.Raycast(transform.position, Vector3.down, _distanceToTheGround + 0.1f);
     }
 
     void DefaultAttack()

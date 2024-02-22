@@ -7,16 +7,26 @@ public class spawner : MonoBehaviour
 {
     [SerializeField] GameObject[] enemies;
     [SerializeField] float spawnrate;
+    [SerializeField] int spawnLimit = 20;
+    bool breakOut = true;
+    bool canSpawn = true;
     void Start()
     {
-        StartCoroutine(delay());
+        //StartCoroutine(delay());
     }
-
+    private void Update()
+    {
+        if(EnemyBase.no_Enemies < spawnLimit && breakOut == true) 
+        {
+            StartCoroutine(delay());
+            breakOut = false;
+        }
+    }
     IEnumerator delay()
     {
         yield return new WaitForSeconds(spawnrate);
+        breakOut = true;
         Instantiate(enemies[Random.Range(0 , enemies.Length)] , RandomLocationNav(transform.position, 100) , Quaternion.identity);
-        StartCoroutine(delay());
     }
 
     private void OnDrawGizmos()

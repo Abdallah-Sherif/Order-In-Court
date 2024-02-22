@@ -10,24 +10,37 @@ public class EnemieBuffer : EnemyBase
     [SerializeField] float bulletSpeed = 1000;
 
     List<Collider> buffedEnemies = new List<Collider>();
+    private void Start()
+    {
+        EnemyBase.no_Enemies += 1;
+    }
     public void ThrowMoney()
     {
         SummonProjectile(0, bulletSpeed, true);
+        IEnumerator delay()
+        {
+            yield return new WaitForSeconds(0.8f);
+        }
         DisableAnyAttackState();
     }
-
     public void BuffEnemies()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, 6, enemieLayerMask);
         foreach (Collider collider in hits)
         {
-            if (collider == this.GetComponent<CapsuleCollider>() || buffedEnemies.Contains(collider)) continue;
+            if (collider == this.GetComponent<CapsuleCollider>() || collider.GetComponent<Health>().isBuffed) continue;
 
+            collider.GetComponent<Health>().isBuffed = true;
             buffedEnemies.Add(collider);
             Debug.Log(collider.gameObject.name);
             addBuffEffect(collider);
         }
-        DisableAnyAttackState();
+        StartCoroutine(delay());
+        IEnumerator delay()
+        {
+            yield return new WaitForSeconds(1.5f);
+            DisableAnyAttackState();
+        }
     }
     void addBuffEffect(Collider collider)
     {
@@ -35,6 +48,6 @@ public class EnemieBuffer : EnemyBase
         Transform col_trans = collider.transform;
         Vector3 col_scale = col_trans.localScale;
         col_trans.localScale *=1.2f;
-        health.health += (int)(health.health * 0.5f);
+        health.health += (int)(health.health * 0.5f);       
     }
 }

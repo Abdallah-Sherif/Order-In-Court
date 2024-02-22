@@ -101,7 +101,6 @@ Transform:
   m_Children:
   - {fileID: 2251111332588236424}
   - {fileID: 3299627288308299354}
-  - {fileID: 7082006898823058426}
   - {fileID: 6910308811812321518}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -230,7 +229,7 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  speed: 100
+  speed: 10
   acceleration: 7
   distanceToStop: 1
   defaultAttackCoolDown: 1
@@ -290,7 +289,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   hasSpecial: 1
-  isBuffed: 0
   onStun:
     m_PersistentCalls:
       m_Calls:
@@ -321,6 +319,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  corner: 
   moneyBagPrefab: {fileID: 5847312789982941756, guid: 9e28fac89dab8a8488561930705a6f07,
     type: 3}
   moneySpawnRate: 1
@@ -336,6 +335,7 @@ MonoBehaviour:
   arrowDistance: 20
   meleeDamage: 10
   meleeDistance: 1.82
+  isBuffed: 0
 --- !u!208 &8922294383933493432
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -382,32 +382,33 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4634905752634825601}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
+      - m_Target: {fileID: 6174593239260579095}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: isDeath
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: -1470091773709700109}
-        m_TargetAssemblyTypeName: EnemyBase, Assembly-CSharp
-        m_MethodName: SetStateToDead
-        m_Mode: 1
+      - m_Target: {fileID: 824481608989008849}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
+        m_MethodName: set_isKinematic
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
+          m_StringArgument: isDeath
+          m_BoolArgument: 1
         m_CallState: 2
-  health: 1000
+  health: 500
   maxHealth: 2000
+  isBuffed: 0
 --- !u!1001 &4991179315323540683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -551,6 +552,21 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4874172501540107119, guid: 06ef0fd037c6dfe4a9397540662e933e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874172501540107119, guid: 06ef0fd037c6dfe4a9397540662e933e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874172501540107119, guid: 06ef0fd037c6dfe4a9397540662e933e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5295265787474462747, guid: 06ef0fd037c6dfe4a9397540662e933e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -618,123 +634,3 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 7257042433345388097}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8712835409895686111
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1109208404716023465}
-    m_Modifications:
-    - target: {fileID: 54553037756100138, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9217738f53f1a584ab88529049cb6b32, type: 2}
-    - target: {fileID: 1290759342676539039, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_Name
-      value: CEOModel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4750092706676449151, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 25be64fdf239b0f4fae3fd8ab8779e92, type: 2}
-    - target: {fileID: 8132825226306298480, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9217738f53f1a584ab88529049cb6b32, type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1290759342676539039, guid: fcf1ddc053622e64797e98ba398f8839,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 811605238819788749}
-  m_SourcePrefab: {fileID: 100100000, guid: fcf1ddc053622e64797e98ba398f8839, type: 3}
---- !u!4 &7082006898823058426 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1919204573192399909, guid: fcf1ddc053622e64797e98ba398f8839,
-    type: 3}
-  m_PrefabInstance: {fileID: 8712835409895686111}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7567040696965040448 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1290759342676539039, guid: fcf1ddc053622e64797e98ba398f8839,
-    type: 3}
-  m_PrefabInstance: {fileID: 8712835409895686111}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &811605238819788749
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7567040696965040448}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7ee674e51271a1d4d9d3beb00617b54d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

@@ -21,6 +21,7 @@ public class CEO : EnemyBase
     [Header("Melee Attack")]
     [SerializeField] int meleeDamage;
     [SerializeField] float meleeDistance = 3;
+    public bool isBuffed = false;
     // Start is called before the first frame update
     void Start()
     {

@@ -89,7 +89,7 @@ namespace URC.Movement
         {
             // Calculate desired velocity based on direction
             Vector3 desiredVelocity = m_desiredDirection * m_groundSettings.TopSpeed * Motor.SpeedMutliplier;
-            desiredVelocity = Vector3.ProjectOnPlane(desiredVelocity, Motor.GroundNormal);
+            if(Motor.GroundNormal != null) desiredVelocity = Vector3.ProjectOnPlane(desiredVelocity, Motor.GroundNormal);
 
             // Determine if we should accelerate or decelerate
             float speedChange = (m_desiredDirection == Vector3.zero) ? m_groundSettings.Deceleration : m_groundSettings.Acceleration;

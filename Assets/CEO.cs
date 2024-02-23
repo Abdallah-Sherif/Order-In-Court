@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CEO : EnemyBase
 {
@@ -23,12 +24,16 @@ public class CEO : EnemyBase
     [SerializeField] int meleeDamage;
     [SerializeField] float meleeDistance = 3;
     public bool isBuffed = false;
+    [SerializeField] Slider slider;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(DropMoneyBags());
     }
-
+    private void Update()
+    {
+        slider.value = GetComponent<Health>().health;
+    }
     IEnumerator DropMoneyBags()
     {
         GameObject moneyBag = Instantiate(moneyBagPrefab, new Vector3(GetPlayer().transform.position.x

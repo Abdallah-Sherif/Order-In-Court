@@ -69,6 +69,7 @@ public class EnemyBase : MonoBehaviour
 
     public void Dead()
     {
+        animator.SetTrigger("isDeath");
         speed = 0;
         acceleration = 0;
         state = State.Dead;
@@ -247,7 +248,6 @@ public class EnemyBase : MonoBehaviour
         {
             delay = 3;
         }
-
         yield return new WaitForSeconds(1f + delay);
 
         if (!CheckGround())

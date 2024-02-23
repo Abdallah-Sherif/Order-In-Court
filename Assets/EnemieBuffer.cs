@@ -16,12 +16,18 @@ public class EnemieBuffer : EnemyBase
     }
     public void ThrowMoney()
     {
+        if(!CheckGround() || state == State.Dead || state == State.Stun)
+        {
+            DisableAnyAttackState();
+            return;
+        }
         SummonProjectile(0, bulletSpeed, true);
+        StartCoroutine(delay());
         IEnumerator delay()
         {
             yield return new WaitForSeconds(0.8f);
+            DisableAnyAttackState();
         }
-        DisableAnyAttackState();
     }
     public void BuffEnemies()
     {

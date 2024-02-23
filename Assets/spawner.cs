@@ -13,11 +13,13 @@ public class spawner : MonoBehaviour
     bool breakOut = true;
     bool canSpawn = true;
     [SerializeField] bool canScale = false;
-    [SerializeField] float scaleTime;
+    [SerializeField] float scaleTime = 25f;
     [SerializeField] int IncreaseFactor = 5;
+    [SerializeField] int maxNum = 50;
     void Start()
     {
         EnemyBase.no_Enemies = 0;
+        if(canScale) StartCoroutine(IncreaseLimit());
     }
     private void Update()
     {
@@ -26,6 +28,13 @@ public class spawner : MonoBehaviour
             StartCoroutine(delay());
             breakOut = false;
         }
+    }
+    IEnumerator IncreaseLimit()
+    {
+        yield return new WaitForSeconds(scaleTime);
+        if (spawnLimit >= maxNum) yield break;
+        spawnLimit += IncreaseFactor;
+        StartCoroutine(IncreaseLimit());
     }
     IEnumerator delay()
     {

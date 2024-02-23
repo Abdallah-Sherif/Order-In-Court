@@ -47,4 +47,8 @@ MonoBehaviour:
   enemies:
   - {fileID: 4883573763080330909, guid: 0b06dd95acad155419ebeb20b69b752a, type: 3}
   - {fileID: 3315521462552084582, guid: 6bf0167d02f04be439d329980f0d0f40, type: 3}
+  - {fileID: 4343186838939350976, guid: f3b00e64f20ec274881aaf7cac4ee47d, type: 3}
   spawnrate: 1
+  spawnLimit: 20
+  spawnRadius: 44.64
+  otherspawn: {fileID: 0}

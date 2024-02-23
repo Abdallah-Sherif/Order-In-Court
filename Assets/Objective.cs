@@ -28,6 +28,7 @@ public class Objective : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(pd == null) { return; }
         if (pd.duration == pd.time && !isdone)
         {
             p_model.GetComponent<Camera>().enabled = true;

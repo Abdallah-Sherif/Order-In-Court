@@ -127,7 +127,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 100.9126
+  field of view: 100.1425
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
+    m_Style: 0
     m_Time: 2
     m_CustomCurve:
       serializedVersion: 2
@@ -1122,7 +1122,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1353094595508985743}
   m_Lens:
-    FieldOfView: 100.9126
+    FieldOfView: 100.1425
     OrthographicSize: 5
     NearClipPlane: 0.01
     FarClipPlane: 1000
@@ -2589,6 +2589,7 @@ MonoBehaviour:
         m_CallState: 2
   enemieKnockBackImpact: 1552
   impactParticleEffect: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
+  hammerDamage: 25
   impactPower: 500
   hammerPoundAudioClips:
   - {fileID: 8300000, guid: 0a503051d72ef6e4382120c2f9f86930, type: 3}
@@ -2604,6 +2605,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 829774b5720bf5645a383184c0f76db3, type: 3}
   hammerClickSFX: {fileID: 8300000, guid: 861f30e73d806864888cf573d5f7364f, type: 3}
   EnemieDeathSFX: {fileID: 8300000, guid: bd81062db1096a64c85116b5a1049531, type: 3}
+  poundDamage: 50
 --- !u!65 &7457009145224567785
 BoxCollider:
   m_ObjectHideFlags: 0

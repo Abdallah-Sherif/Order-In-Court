@@ -12,6 +12,9 @@ public class spawner : MonoBehaviour
     [SerializeField] Transform otherspawn;
     bool breakOut = true;
     bool canSpawn = true;
+    [SerializeField] bool canScale = false;
+    [SerializeField] float scaleTime;
+    [SerializeField] int IncreaseFactor = 5;
     void Start()
     {
         EnemyBase.no_Enemies = 0;

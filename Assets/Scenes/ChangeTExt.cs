@@ -8,8 +8,6 @@ public class ChangeText : MonoBehaviour
     private TextMeshPro textMeshProObject;
     private HashSet<KeyCode> pressedKeys = new HashSet<KeyCode>();
     [SerializeField] GameObject pc;
-    [SerializeField] Light spotLight;
-    [SerializeField] Light bigLight;
     [SerializeField] GameObject Enemy;
     private bool canAttack = false, canDash = false, canJump = false, doneInputs = false, special1 = false, special2 = false;
 
@@ -137,8 +135,6 @@ public class ChangeText : MonoBehaviour
         if(Enemy != null) Enemy.SetActive(false);
         yield return new WaitForSeconds(3);
         pc.SetActive(true);
-        bigLight.enabled = false;
-        spotLight.enabled = true;
         yield return new WaitForSeconds(2);
 
     }

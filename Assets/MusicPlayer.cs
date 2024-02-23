@@ -13,6 +13,17 @@ public class MusicPlayer : MonoBehaviour
         audioSource= GetComponent<AudioSource>();
         StartCoroutine(PlayMusic());
     }
+    // Update is called once per frame
+    void Update()
+    {
+        if(PauseMenuLogic.isPaused)
+        {
+            audioSource.volume = Mathf.Lerp(audioSource.volume,0.1f,Time.deltaTime * 2);
+        }else
+        {
+            audioSource.volume = Mathf.Lerp(audioSource.volume, 0.2f, Time.deltaTime * 2);
+        }
+    }
     IEnumerator PlayMusic()
     {
         audioSource.clip= clipList[currentSongIndex];
@@ -25,10 +36,5 @@ public class MusicPlayer : MonoBehaviour
             currentSongIndex= 0;
         }
         StartCoroutine(PlayMusic());
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuLogic : MonoBehaviour
 {
-    bool isPaused = false;
+    public static bool isPaused = false;
     [SerializeField] UnityEvent onPause;
     [SerializeField] UnityEvent onResume;
     // Start is called before the first frame update
@@ -42,5 +43,9 @@ public class PauseMenuLogic : MonoBehaviour
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

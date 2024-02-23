@@ -99,7 +99,7 @@ namespace URC.Camera
             Cursor.lockState= CursorLockMode.None;
             Cursor.visible = true;
         }
-
+        
         private void Awake()
         {
             VerifyCorrectSetup();
@@ -107,7 +107,7 @@ namespace URC.Camera
 
         private void LateUpdate()
         {
-            if(isDead) return;
+            if(isDead || PauseMenuLogic.isPaused) return;
             if (InputHelper.getDisableLooking()) return;
             UpdateRotation();
             UpdatePosition();
@@ -115,7 +115,7 @@ namespace URC.Camera
 
         private void FixedUpdate()
         {
-            if (isDead) return;
+            if (isDead || PauseMenuLogic.isPaused) return;
             UpdatePlayerRotation();
         }
 

@@ -23,6 +23,11 @@ public class PlayerSoundFx : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         float delay = Random.Range(15, 25);
+        if(PauseMenuLogic.isPaused)
+        {
+            StartCoroutine(PlayFx());
+            yield break;
+        }
         int randomIndex = Random.Range(0, voiceLinesToPlayClips.Count);
         AudioFxManager.instance.PlayPlayerFX(voiceLinesToPlayClips[randomIndex],1f);
         yield return new WaitForSeconds(voiceLinesToPlayClips[randomIndex].length + delay);

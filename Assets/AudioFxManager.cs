@@ -16,11 +16,12 @@ public class AudioFxManager : MonoBehaviour
     private void Update()
     {
         PlayerSource.transform.position = Hammer.instance.transform.position;
+
     }
 
     public void PlayPlayerFX(AudioClip clip,float volume, bool isAbility = false)
     {
-        if (!isAbility && PlayerSource.isPlaying) return;
+        if ((!isAbility && PlayerSource.isPlaying) || PauseMenuLogic.isPaused) return;
         PlayerSource.clip = clip;
         PlayerSource.volume = volume;
         PlayerSource.Play();
@@ -28,7 +29,7 @@ public class AudioFxManager : MonoBehaviour
     
     public void PlaySoundEffect(AudioClip clip,Transform spawnTransform,float volume,bool isVoiceLine = false)
     {
-
+        if(PauseMenuLogic.isPaused) return;
         AudioSource audioSource = Instantiate(audioSourcePrefab,spawnTransform.position,Quaternion.identity);
 
         audioSource.clip = clip;

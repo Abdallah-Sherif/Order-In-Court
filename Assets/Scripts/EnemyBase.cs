@@ -368,7 +368,6 @@ public class EnemyBase : MonoBehaviour
 
         GameObject g = Instantiate(projectiles[projectileID], dummyAim.transform.position , Quaternion.LookRotation( GetPlayer().transform.position - transform.position));
         g.GetComponent<Rigidbody>().AddForce(g.transform.forward * Force * Time.deltaTime , ForceMode.Impulse);
-
         if (DestroyLater)
             Destroy(g , 5);
 

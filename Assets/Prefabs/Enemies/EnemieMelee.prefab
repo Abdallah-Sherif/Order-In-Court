@@ -234,7 +234,7 @@ MonoBehaviour:
   corner: 
   isDead: 0
   enemieAttackRate: 1
-  meleeDamage: 25
+  meleeDamage: 10
   isBuffed: 0
 --- !u!208 &41090604871575424
 NavMeshObstacle:
@@ -309,6 +309,8 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   isBuffed: 0
+  playerDeathClip: {fileID: 0}
+  playerHealthSlider: {fileID: 0}
 --- !u!1 &5792426502738294887
 GameObject:
   m_ObjectHideFlags: 0

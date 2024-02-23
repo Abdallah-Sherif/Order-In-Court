@@ -8,6 +8,7 @@ public class BossTrigger : MonoBehaviour
 
     BoxCollider triggerBox;
     [SerializeField] UnityEvent onTrigger;
+    [SerializeField] AudioClip CEOEntranceClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,7 @@ public class BossTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag != "Player") return;
+        AudioFxManager.instance.PlayPlayerFX(CEOEntranceClip, 1f, true);
         onTrigger.Invoke();
         Destroy(gameObject);
     }

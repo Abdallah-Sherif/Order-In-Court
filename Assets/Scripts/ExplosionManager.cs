@@ -32,6 +32,7 @@ public class ExplosionManager : MonoBehaviour
         Collider[] hits = Physics.OverlapSphere(point.position, radius);
         foreach (Collider collider in hits)
         {
+            if (isBullet && collider.transform.tag == "Player") continue;
             Rigidbody rb = collider.GetComponent<Rigidbody>();
             Health health = collider.GetComponent<Health>();
             if(rb == null || collider.gameObject.layer == 14 || collider.gameObject.layer == 13) continue;

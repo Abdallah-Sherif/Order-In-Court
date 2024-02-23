@@ -101,6 +101,7 @@ MonoBehaviour:
       m_Calls: []
   bulletLayer: 0
   activateExpo: 0
+  damage: 3
 --- !u!1001 &3430952165792606655
 PrefabInstance:
   m_ObjectHideFlags: 0

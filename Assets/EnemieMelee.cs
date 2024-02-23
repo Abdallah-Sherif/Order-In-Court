@@ -14,8 +14,17 @@ public class EnemieMelee : EnemyBase
     }
     public void AttackPlayer()
     {
-        GetPlayer().GetComponent<Health>().TakeDamage(meleeDamage);
-        DisableAnyAttackState();
+        StartCoroutine(delay());
+        IEnumerator delay()
+        {
+            yield return new WaitForSeconds(1f);
+            float dist = Vector3.Distance(transform.position, GetPlayer().transform.position);
+            if(dist <= defaultAttackRadius)
+            {
+                GetPlayer().GetComponent<Health>().TakeDamage(meleeDamage);
+            }
+            DisableAnyAttackState();
+        }
     }
     public void SpeicalAttack()
     {

@@ -197,12 +197,14 @@ namespace URC.Core
 
         private void Update()
         {
+            if (GetComponent<Health>().health <= 0) return;
             UpdateGrounding();
             UpdateTimers();
         }
 
         private void FixedUpdate()
         {
+            if (GetComponent<Health>().health <= 0) return;
             ApplyGravity();
         }
 

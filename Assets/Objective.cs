@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
@@ -13,6 +14,7 @@ public class Objective : MonoBehaviour
     [SerializeField] bool findEnemies;
     [SerializeField] PlayableDirector pd;
     [SerializeField] Transform p_model;
+    [SerializeField] TextMeshProUGUI text;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,9 @@ public class Objective : MonoBehaviour
 
             isdone = true;
         }
+        text.text = "Destroy the companies computer" +
+            " to lower their stock price! \n" +
+            " Computers crashed: " + objectivesCompleted + "/" + numberOfObjectivesToComplete;
     }
     private void FindNumberOfEnemies()
     {

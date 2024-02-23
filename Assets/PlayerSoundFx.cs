@@ -21,9 +21,10 @@ public class PlayerSoundFx : MonoBehaviour
 
     IEnumerator PlayFx()
     {
-        float delay = Random.Range(2, 5);
+        yield return new WaitForSeconds(5);
+        float delay = Random.Range(15, 25);
         int randomIndex = Random.Range(0, voiceLinesToPlayClips.Count);
-        AudioFxManager.instance.PlayPlayerFX(voiceLinesToPlayClips[randomIndex],3f);
+        AudioFxManager.instance.PlayPlayerFX(voiceLinesToPlayClips[randomIndex],1f);
         yield return new WaitForSeconds(voiceLinesToPlayClips[randomIndex].length + delay);
         StartCoroutine(PlayFx());
 

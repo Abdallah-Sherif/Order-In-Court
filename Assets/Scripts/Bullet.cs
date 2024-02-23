@@ -9,8 +9,10 @@ public class Bullet : MonoBehaviour
     string tag;
     [SerializeField] UnityEvent onHit;
     [SerializeField] int bulletLayer;
+    [SerializeField] int explosionDamage = 15;
     bool isDying = false;
     public bool activateExpo = false;
+    public int damage = 10;
     void Start()
     {
         Destroy(gameObject,10);
@@ -41,8 +43,9 @@ public class Bullet : MonoBehaviour
         if (activateExpo)
         {
             onHit.Invoke();
-            ExplosionManager.instance.CreateExplosion(transform, 1, 2, 25,true);
+            ExplosionManager.instance.CreateExplosion(transform, 1, 2, explosionDamage, true);
             Destroy(gameObject, 1.5f);
+            return;
         }else
         {
             Destroy(gameObject);
@@ -52,7 +55,7 @@ public class Bullet : MonoBehaviour
         if (collision.transform.tag == tag ) return;
         Health health = collision.gameObject.GetComponent<Health>();
         if (health == null) return;
-        health.TakeDamage(10);
+        health.TakeDamage(damage);
 
     }
 }

@@ -59,7 +59,7 @@ public class Uzi : MonoBehaviour
         ability1.coolDown = ability1Cooldown;
         ability1.abilityLogicStart = delegate 
         {
-            AudioFxManager.instance.PlayPlayerFX(abilitySounds[UnityEngine.Random.Range(0, abilitySounds.Count)], 3f, true);
+            AudioFxManager.instance.PlayPlayerFX(abilitySounds[UnityEngine.Random.Range(0, abilitySounds.Count)], 1f, true);
             ability0.coolDown /= 2;
             anim.speed= 2;
         };

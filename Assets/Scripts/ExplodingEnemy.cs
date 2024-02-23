@@ -7,6 +7,7 @@ public class ExplodingEnemy : EnemyBase
 {
     [SerializeField] GameObject fire_VFX;
     [SerializeField] float timeBeforeExpo = 2;
+    [SerializeField] int ExplosionDamage = 20;
     public bool isBuffed = false;
     private void Start()
     {
@@ -20,7 +21,7 @@ public class ExplodingEnemy : EnemyBase
             yield return new WaitForSeconds(timeBeforeExpo);
             if (!isDead && Vector3.Distance(GetPlayer().position, transform.position) <= defaultAttackRadius)
             {
-                ExplosionManager.instance.CreateExplosion(transform, 6, 10, 25);
+                ExplosionManager.instance.CreateExplosion(transform, 6, 10, ExplosionDamage);
                 SetStateToDead();
                 Destroy(gameObject);
             }

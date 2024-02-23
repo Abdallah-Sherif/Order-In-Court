@@ -320,6 +320,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   corner: 
+  isDead: 0
   moneyBagPrefab: {fileID: 5847312789982941756, guid: 9e28fac89dab8a8488561930705a6f07,
     type: 3}
   moneySpawnRate: 1
@@ -394,21 +395,25 @@ MonoBehaviour:
           m_StringArgument: isDeath
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 824481608989008849}
-        m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
-        m_MethodName: set_isKinematic
-        m_Mode: 6
+      - m_Target: {fileID: -1470091773709700109}
+        m_TargetAssemblyTypeName: EnemyBase, Assembly-CSharp
+        m_MethodName: Dead
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: isDeath
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
   health: 500
   maxHealth: 2000
   isBuffed: 0
+  playerDeathClip: {fileID: 0}
+  playerHealthSlider: {fileID: 0}
+  lowHealthAudioSource: {fileID: 0}
+  isObject: 0
 --- !u!1001 &4991179315323540683
 PrefabInstance:
   m_ObjectHideFlags: 0

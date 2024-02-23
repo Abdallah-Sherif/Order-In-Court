@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CEO : EnemyBase
@@ -39,6 +40,14 @@ public class CEO : EnemyBase
     }
     IEnumerator SpawnArrows()
     {
+        if (!CheckGround())
+        {
+            animator.SetBool("isStock", false);
+            DisableAnyAttackState();
+            arrowsShot = 0;
+            yield break;
+        }
+
         SummonProjectile(0, arrowSpeed, true);
         arrowsShot += 1;
         yield return new WaitForSeconds(arrowSpawnRate);

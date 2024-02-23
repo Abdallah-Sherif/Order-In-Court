@@ -12,12 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6a429550954192bf507d745572b8de, type: 3}
   m_Name: Toon
   m_EditorClassIdentifier: 
-  ForceIncludedShaders: []
+  ForceIncludedShaders:
+  - {fileID: 4800000, guid: 32cf79821a574ca29fd7697e92aae19d, type: 3}
+  - {fileID: 4800000, guid: 11527595c9484fb09a4ee48b0e47204f, type: 3}
+  - {fileID: 4800000, guid: 48be904f99f74bee85d2e82c67910da8, type: 3}
+  - {fileID: 4800000, guid: 3774c88acba044f58195398345cfc7cd, type: 3}
+  - {fileID: 4800000, guid: 7be86da3d47840bd8b73ba28db1a2ca1, type: 3}
+  - {fileID: 4800000, guid: 2268c7f425a8453ba9e77607d402a9b4, type: 3}
+  - {fileID: 4800000, guid: 4aee5d6e842043a384557e2f0557f76c, type: 3}
   GlobalRampSettings:
     Threshold: 0
     SpecularThreshold: 0.99
     RimThreshold: 0.5
-    Mode: 0
+    Mode: 1
     Smoothness: 0.02
     SpecularSmoothness: 0.005
     RimSmoothness: 0.1
@@ -29,7 +36,7 @@ MonoBehaviour:
   CameraRendererSettings:
     AdditionalLights: 0
     TiledLighting: 0
-    MaxLightsPerTile: 0
+    MaxLightsPerTile: 32
     OverrideRenderTextureFormat: 0
     RenderTextureFormat: 4
     AllowHdr: 0
@@ -66,7 +73,7 @@ MonoBehaviour:
       Blur: 0
       BlurEarlyBail: 1
       BlurEarlyBailThreshold: 0.01
-      BlurScatter: 0
+      BlurScatter: 1
       VsmPrecision: 0
       SoftShadows:
         Enabled: 1
@@ -98,5 +105,5 @@ MonoBehaviour:
   Extensions:
     Extensions: []
   PostProcessing:
-    Enabled: 0
+    Enabled: 1
     Passes: []

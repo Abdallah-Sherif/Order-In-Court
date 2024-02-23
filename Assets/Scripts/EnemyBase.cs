@@ -99,6 +99,8 @@ public class EnemyBase : MonoBehaviour
     public void FixedUpdate()
     {
 
+        if (Motor.instance.isEnemyOff) return;
+
         if (state == State.Dead) { rb.isKinematic = true;  enabled = false; }
 
         UpdateNavMeshPath();

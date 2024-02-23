@@ -141,6 +141,8 @@ namespace URC.Core
         [Tooltip("The steepest slope angle that the motor will consider walkable.")]
         public float m_maxSlopeAngle;
 
+        public bool isEnemyOff = false;
+
         [Header("Others")]
         [Tooltip("Advanced settings for the motor that you usually do not need to change.")]
         public AdvancedSettings m_advancedSettings = new AdvancedSettings();

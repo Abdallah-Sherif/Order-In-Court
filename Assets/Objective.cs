@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
 using UnityEngine.UIElements;
+using URC.Core;
 
 public class Objective : MonoBehaviour
 {
@@ -57,5 +58,15 @@ public class Objective : MonoBehaviour
         p_model.GetComponent<Camera>().enabled = false;
 
         Debug.Log("Complete");
+    }
+
+    public void turnoffEnemies()
+    {
+        Motor.instance.isEnemyOff = true;
+    }
+
+    public void turnoONEnemies()
+    {
+        Motor.instance.isEnemyOff = false;
     }
 }

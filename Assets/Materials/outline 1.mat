@@ -21,25 +21,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: outline 1
-  m_Shader: {fileID: 4800000, guid: ff7f2aca5d3f42edbad9a22bab9bebe6, type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - CLIP_SPACE
-  m_InvalidKeywords:
-  - _ADDITIONAL_LIGHTS_ENABLED
-  - _ALPHACLIP_ON
   - _ALPHATEST_ON
-  - _ENVIRONMENT_LIGHTING_ENABLED
-  - _FOG
-  - _RAMP_TRIPLE
-  - _TOON_RECEIVE_SHADOWS
-  - _ZWRITE_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -120,7 +113,7 @@ Material:
     - _AlphaClip: 1
     - _AlphaClipThreshold: 0.5
     - _AlphaClipping: 0
-    - _AlphaToMask: 0
+    - _AlphaToMask: 1
     - _AnisoSpecular: 0
     - _Blend: 0
     - _BlendDst: 0
@@ -200,7 +193,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.909804, g: 0.7803922, b: 0.69411767, a: 1}
-    - _Color: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+    - _Color: {r: 0.909804, g: 0.7803922, b: 0.69411767, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _MainColor: {r: 0, g: 0, b: 0, a: 1}

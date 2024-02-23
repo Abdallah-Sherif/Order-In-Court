@@ -208,7 +208,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &2118975850570513042
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -253,7 +253,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 12595.83
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -346,6 +346,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 200
   m_maxSlopeAngle: 45
+  isEnemyOff: 0
   m_advancedSettings:
     LoggingLevel: 1
     m_useOptimizations: 0
